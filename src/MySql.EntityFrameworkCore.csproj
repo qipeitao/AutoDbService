@@ -1,0 +1,85 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Description>MySQL Server database provider for Entity Framework Core.</Description>
+		<TargetFrameworks>netstandard2.1</TargetFrameworks>
+		<DelaySign>true</DelaySign>
+		<AssemblyName>MySql.EntityFrameworkCore</AssemblyName>
+		<PackageId>MySql.EntityFrameworkCore</PackageId>
+		<SignAssembly>True</SignAssembly>
+		<DelaySign>True</DelaySign>
+		<AssemblyOriginatorKeyFile>..\..\ConnectorNetPublicKey.snk</AssemblyOriginatorKeyFile>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+		<Version>200.0.17+MySQL8.0.31</Version>
+		<Title>mysql automapper MySQL8.0.31</Title>
+		<Authors>大圣</Authors>
+		<Company>大圣</Company>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
+	  <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
+	  <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\MySQL.Data\src\MySql.Data.csproj" />
+		<ProjectReference Include="..\core\EFCore.Abstractions\EFCore.Abstractions.csproj" />
+		<ProjectReference Include="..\core\EFCore.Relational\EFCore.Relational.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\MySQLStrings.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>MySQLStrings.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\MySQLStrings.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>MySQLStrings.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+	<!--对外隐藏引用-->
+	<PropertyGroup>
+		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+     </PropertyGroup>
+	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup> 
+	</Target>
+	
+	<ItemGroup>
+	     <ProjectReference Include="..\core\EFCore\EFCore.csproj">
+		    <PrivateAssets>all</PrivateAssets> 
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.Abstractions\EFCore.Abstractions.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.Analyzers\EFCore.Analyzers.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.Cosmos\EFCore.Cosmos.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.InMemory\EFCore.InMemory.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.Proxies\EFCore.Proxies.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+		<ProjectReference Include="..\core\EFCore.Relational\EFCore.Relational.csproj">
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MySql.EntityFrameworkCore</id>
+    <version>15.0.17+MySQL8.0.31</version>
+    <authors>Oracle</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="expression">GPL-2.0-only</license>
+    <licenseUrl>https://licenses.nuget.org/GPL-2.0-only</licenseUrl>
+    <projectUrl>https://github.com/mysql/mysql-connector-net</projectUrl>
+    <iconUrl>http://www.mysql.com/common/logos/logo-mysql-170x115.png</iconUrl>
+    <description>MySQL Server database provider for Entity Framework Core.</description>
+    <copyright>Copyright (c) 2022, Oracle and/or its affiliates.</copyright>
+    <tags>MySql .NET Connector MySql Entity Framework Core netcore .Net Core MySql Conector/Net Entity Framework Core coreclr C/NET C/Net Core</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="MySql.Data" version="8.0.31" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="5.0.17" include="All" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="5.0.17" include="All" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\360极速浏览器X下载\mysql-connector-net-8.0\EFCore5\src\bin\Debug\netstandard2.1\MySql.EntityFrameworkCore.dll" target="lib\netstandard2.1\MySql.EntityFrameworkCore.dll" />
+    <file src="D:\360极速浏览器X下载\mysql-connector-net-8.0\EFCore5\src\bin\Debug\netstandard2.1\MySql.EntityFrameworkCore.xml" target="lib\netstandard2.1\MySql.EntityFrameworkCore.xml" />
+  </files>
+</package>

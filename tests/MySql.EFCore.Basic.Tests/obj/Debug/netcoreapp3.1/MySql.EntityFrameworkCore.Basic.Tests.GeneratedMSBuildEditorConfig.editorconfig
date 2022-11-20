@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = MySql.EntityFrameworkCore.Basic.Tests
+build_property.ProjectDir = D:\360极速浏览器X下载\mysql-connector-net-8.0\EFCore5\tests\MySql.EFCore.Basic.Tests\

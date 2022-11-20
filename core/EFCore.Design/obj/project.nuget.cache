@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "dgSpecHash": "Z/OngrUoPrTt4beIj8cXDHsbsB4spDRiARVg6Nydr5mt3QsUxVeuNFrPig+Xj9Ju6sv+WLqkJp6MM5C+dyikyg==",
+  "success": false,
+  "projectFilePath": "D:\\360极速浏览器X下载\\efcore-5.0.17 - 副本\\src\\EFCore.Design\\EFCore.Design.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\qipt\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "项目依赖项 Microsoft.Extensions.HostFactoryResolver.Sources 不具有包含下限。在依赖项版本中包含下限可确保一致的还原结果。",
+      "libraryId": "Microsoft.Extensions.HostFactoryResolver.Sources",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1101",
+      "level": "Error",
+      "message": "找不到包 Microsoft.Extensions.HostFactoryResolver.Sources。源 DevExpress 21.1 Local, DevExpress 22.1 Local, local, Microsoft Visual Studio Offline Packages, nuget.org 中不存在具有此 ID 的包",
+      "libraryId": "Microsoft.Extensions.HostFactoryResolver.Sources",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    }
+  ]
+}

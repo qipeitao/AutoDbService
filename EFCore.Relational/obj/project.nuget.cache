@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "dgSpecHash": "U9qaFh+BKq2HA+K7yhDXbPe7Yk+n6gptg6qnErM1DI5z1YbzRfijJsWYqBqctDVU/gYzPQ3MozH+IDIcRUZYwg==",
+  "success": true,
+  "projectFilePath": "D:\\360极速浏览器X下载\\mysql-connector-net-8.0\\EFCore5\\EFCore.Relational\\EFCore.Relational.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\1.0.0\\microsoft.extensions.caching.abstractions.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.caching.memory\\1.0.0\\microsoft.extensions.caching.memory.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\1.0.0\\microsoft.extensions.configuration.abstractions.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\1.0.0\\microsoft.extensions.dependencyinjection.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\1.0.0\\microsoft.extensions.dependencyinjection.abstractions.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.logging\\1.0.0\\microsoft.extensions.logging.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\1.0.0\\microsoft.extensions.logging.abstractions.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.options\\1.0.0\\microsoft.extensions.options.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.extensions.primitives\\1.0.0\\microsoft.extensions.primitives.1.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.netcore.platforms\\1.0.1\\microsoft.netcore.platforms.1.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.netcore.targets\\1.0.1\\microsoft.netcore.targets.1.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\stylecop.analyzers\\1.1.118\\stylecop.analyzers.1.1.118.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.collections\\4.0.11\\system.collections.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.collections.concurrent\\4.0.12\\system.collections.concurrent.4.0.12.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.collections.immutable\\1.1.36\\system.collections.immutable.1.1.36.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.componentmodel\\4.0.1\\system.componentmodel.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.componentmodel.annotations\\4.0.0\\system.componentmodel.annotations.4.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.diagnostics.debug\\4.0.11\\system.diagnostics.debug.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.diagnostics.diagnosticsource\\4.0.0\\system.diagnostics.diagnosticsource.4.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.diagnostics.tracing\\4.1.0\\system.diagnostics.tracing.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.globalization\\4.0.11\\system.globalization.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.io\\4.1.0\\system.io.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.linq\\4.1.0\\system.linq.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.linq.expressions\\4.1.0\\system.linq.expressions.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.objectmodel\\4.0.12\\system.objectmodel.4.0.12.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection\\4.1.0\\system.reflection.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.emit\\4.0.1\\system.reflection.emit.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.emit.ilgeneration\\4.0.1\\system.reflection.emit.ilgeneration.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.emit.lightweight\\4.0.1\\system.reflection.emit.lightweight.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.extensions\\4.0.1\\system.reflection.extensions.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.primitives\\4.0.1\\system.reflection.primitives.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.typeextensions\\4.1.0\\system.reflection.typeextensions.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.resources.resourcemanager\\4.0.1\\system.resources.resourcemanager.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.runtime\\4.1.0\\system.runtime.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.runtime.extensions\\4.1.0\\system.runtime.extensions.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.runtime.handles\\4.0.1\\system.runtime.handles.4.0.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.runtime.interopservices\\4.1.0\\system.runtime.interopservices.4.1.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.text.encoding\\4.0.11\\system.text.encoding.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.threading\\4.0.11\\system.threading.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.threading.tasks\\4.0.11\\system.threading.tasks.4.0.11.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.17\\microsoft.entityframeworkcore.5.0.17.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.17\\microsoft.entityframeworkcore.abstractions.5.0.17.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1604",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "项目依赖项 Microsoft.Extensions.Configuration.Abstractions 不具有包含下限。在依赖项版本中包含下限可确保一致的还原结果。",
+      "libraryId": "Microsoft.Extensions.Configuration.Abstractions",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 Microsoft.Extensions.Caching.Memory 的包含下限。已解决 Microsoft.Extensions.Caching.Memory 1.0.0 的近似最佳匹配。",
+      "libraryId": "Microsoft.Extensions.Caching.Memory",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 Microsoft.Extensions.DependencyInjection 的包含下限。已解决 Microsoft.Extensions.DependencyInjection 1.0.0 的近似最佳匹配。",
+      "libraryId": "Microsoft.Extensions.DependencyInjection",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 Microsoft.Extensions.Logging 的包含下限。已解决 Microsoft.Extensions.Logging 1.0.0 的近似最佳匹配。",
+      "libraryId": "Microsoft.Extensions.Logging",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 System.Collections.Immutable 的包含下限。已解决 System.Collections.Immutable 1.1.36 的近似最佳匹配。",
+      "libraryId": "System.Collections.Immutable",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 System.ComponentModel.Annotations 的包含下限。已解决 System.ComponentModel.Annotations 4.0.0 的近似最佳匹配。",
+      "libraryId": "System.ComponentModel.Annotations",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1602",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Microsoft.EntityFrameworkCore 未提供依赖项 System.Diagnostics.DiagnosticSource 的包含下限。已解决 System.Diagnostics.DiagnosticSource 4.0.0 的近似最佳匹配。",
+      "libraryId": "System.Diagnostics.DiagnosticSource",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1”而不是项目目标框架“.NETStandard,Version=v2.1”还原包“System.Collections.Immutable 1.1.36”。此包可能与项目不完全兼容。",
+      "libraryId": "System.Collections.Immutable",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1”而不是项目目标框架“.NETStandard,Version=v2.1”还原包“System.ComponentModel.Annotations 4.0.0”。此包可能与项目不完全兼容。",
+      "libraryId": "System.ComponentModel.Annotations",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.1"
+      ]
+    }
+  ]
+}
