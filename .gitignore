@@ -38,3 +38,10 @@
 /MySQL.Data/src/obj
 /MySqlCore/bin/Debug/netstandard2.1
 /MySqlCore/obj
+/QuickNetQipt.Wpf/bin/Debug/net6.0-windows
+/QuickNetQipt.Wpf/obj
+/QuickNetQipt.Entity/bin/Debug/net6.0
+/QuickNetQipt.Entity/obj
+/QuickNetQipt.Engine/bin/Debug/net6.0
+/QuickNetQipt.Engine/obj
+/QuickNetQipt.Lib/obj

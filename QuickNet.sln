@@ -25,6 +25,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql.Data", "MySQL.Data\sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBMap", "DBMap", "{11DCCD19-F6E3-44DC-A170-12A4953D29B1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{EB5947A4-FCC5-4276-84D8-DF92463E6430}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickNetQipt.Wpf", "QuickNetQipt.Wpf\QuickNetQipt.Wpf.csproj", "{B7EE0E37-3690-476E-813E-0F03F7C6D9FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{776E929B-38C6-4535-8D80-50EBCAFD0FBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickNetQipt.Entity", "QuickNetQipt.Entity\QuickNetQipt.Entity.csproj", "{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickNetQipt.Engine", "QuickNetQipt.Engine\QuickNetQipt.Engine.csproj", "{7CF1A96A-740E-4B4F-882B-302E2656B2A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickNetQipt.Lib", "QuickNetQipt.Lib\QuickNetQipt.Lib.csproj", "{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +79,22 @@ Global
 		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7EE0E37-3690-476E-813E-0F03F7C6D9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7EE0E37-3690-476E-813E-0F03F7C6D9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7EE0E37-3690-476E-813E-0F03F7C6D9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7EE0E37-3690-476E-813E-0F03F7C6D9FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
