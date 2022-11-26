@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql.Data", "..\MySQL.Data\src\MySql.Data.csproj", "{211964C5-1F3B-4D2B-8E25-BC40141D697E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql.EntityFrameworkCore", "src\MySql.EntityFrameworkCore.csproj", "{4935154D-018E-4D41-AD2D-E50FBD350EF9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EFCore", "EFCore", "{804C6637-3FA0-4D66-9C3F-71C08A2FD274}"
@@ -23,16 +21,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Proxies", "core\EFCo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore.Relational", "core\EFCore.Relational\EFCore.Relational.csproj", "{82C0AFA2-622B-4F5C-8321-6314EE8D207C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySql.Data", "MySQL.Data\src\MySql.Data.csproj", "{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{211964C5-1F3B-4D2B-8E25-BC40141D697E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{211964C5-1F3B-4D2B-8E25-BC40141D697E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{211964C5-1F3B-4D2B-8E25-BC40141D697E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{211964C5-1F3B-4D2B-8E25-BC40141D697E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4935154D-018E-4D41-AD2D-E50FBD350EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4935154D-018E-4D41-AD2D-E50FBD350EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4935154D-018E-4D41-AD2D-E50FBD350EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,6 +61,10 @@ Global
 		{82C0AFA2-622B-4F5C-8321-6314EE8D207C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82C0AFA2-622B-4F5C-8321-6314EE8D207C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82C0AFA2-622B-4F5C-8321-6314EE8D207C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C559EDB0-F0B7-4718-8E5B-32F4C390FE40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

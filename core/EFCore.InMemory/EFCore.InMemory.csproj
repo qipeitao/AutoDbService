@@ -10,6 +10,7 @@
     <PackageTags>$(PackageTags);In-Memory</PackageTags>
     <RepositoryUrl>a</RepositoryUrl>
     <RepositoryCommit>a</RepositoryCommit>
+    <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

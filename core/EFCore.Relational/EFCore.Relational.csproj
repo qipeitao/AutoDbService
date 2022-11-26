@@ -10,6 +10,7 @@
     <RepositoryUrl>a</RepositoryUrl>
     <RepositoryCommit>a</RepositoryCommit>
     <Version>1111</Version>
+    <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>

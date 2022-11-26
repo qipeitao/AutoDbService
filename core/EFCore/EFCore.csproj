@@ -20,7 +20,8 @@
     <PackageReleaseNotes>大圣</PackageReleaseNotes>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <IncludeSymbols>False</IncludeSymbols>
-    <IsPublishable>False</IsPublishable> 
+    <IsPublishable>False</IsPublishable>
+    <BaseOutputPath>bin\</BaseOutputPath> 
   </PropertyGroup>
 
   <ItemGroup>

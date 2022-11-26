@@ -6,7 +6,7 @@
 		<DelaySign>true</DelaySign>
 		<AssemblyName>MySql.EntityFrameworkCore</AssemblyName>
 		<PackageId>MySql.EntityFrameworkCore</PackageId>
-		<SignAssembly>True</SignAssembly>
+		<SignAssembly>False</SignAssembly>
 		<DelaySign>True</DelaySign>
 		<AssemblyOriginatorKeyFile>..\..\ConnectorNetPublicKey.snk</AssemblyOriginatorKeyFile>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -30,9 +30,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\MySQL.Data\src\MySql.Data.csproj" />
 		<ProjectReference Include="..\core\EFCore.Abstractions\EFCore.Abstractions.csproj" />
 		<ProjectReference Include="..\core\EFCore.Relational\EFCore.Relational.csproj" />
+		<ProjectReference Include="..\MySQL.Data\src\MySql.Data.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -52,6 +52,7 @@
 	<!--对外隐藏引用-->
 	<PropertyGroup>
 		<TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+		<BaseOutputPath>bin\</BaseOutputPath>
      </PropertyGroup>
 	<Target Name="CopyProjectReferencesToPackage" DependsOnTargets="ResolveReferences">
 		<ItemGroup>

@@ -1,0 +1,22 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+/.vs
+/core/EFCore/bin/Debug/netstandard2.1 
+/core/EFCore/obj/Debug/netstandard2.1
+/core/EFCore.Abstractions/bin/Debug/netstandard2.1 
+/core/EFCore.Abstractions/obj/Debug/netstandard2.1
+/core/EFCore.Analyzers/bin/Debug/netstandard2.1 
+/core/EFCore.Analyzers/obj/Debug/netstandard2.1
+/core/EFCore.Cosmos/bin/Debug/netstandard2.1 
+/core/EFCore.Cosmos/obj/Debug/netstandard2.1
+/core/EFCore.InMemory/bin/Debug/netstandard2.1 
+/core/EFCore.InMemory/obj/Debug/netstandard2.1
+/core/EFCore.Proxies/bin/Debug/netstandard2.1 
+/core/EFCore.Proxies/obj/Debug/netstandard2.1
+/core/EFCore.Relational/bin/Debug/netstandard2.1 
+/core/EFCore.Relational/obj/Debug/netstandard2.1
+/core/MySql.Data/bin/Debug/netstandard2.1 
+/core/MySql.Data/obj/Debug/netstandard2.1
+/core/MySql.EntityFrameworkCore/bin/Debug/netstandard2.1 
+/core/MySql.EntityFrameworkCore/obj/Debug/netstandard2.1

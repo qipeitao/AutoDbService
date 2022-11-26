@@ -10,6 +10,7 @@
     <PackageTags>$(PackageTags);CosmosDb;SQL API</PackageTags>
     <RepositoryUrl>a</RepositoryUrl>
     <RepositoryCommit>a</RepositoryCommit>
+    <BaseOutputPath>bin\</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
