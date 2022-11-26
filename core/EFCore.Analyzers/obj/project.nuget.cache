@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "DmxOygOV0w3nonRvLrzqcckcPoUvax6lC8KFwRRadpELwR3Iy908uqP2xCboHAot0dv1ZXXeFgqWkfrT+lH+rQ==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\EFCore5\\core\\EFCore.Analyzers\\EFCore.Analyzers.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.codeanalysis.common\\4.4.0\\microsoft.codeanalysis.common.4.4.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\microsoft.codeanalysis.csharp\\4.4.0\\microsoft.codeanalysis.csharp.4.4.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.numerics.vectors\\4.4.0\\system.numerics.vectors.4.4.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.reflection.metadata\\5.0.0\\system.reflection.metadata.5.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.text.encoding.codepages\\6.0.0\\system.text.encoding.codepages.6.0.0.nupkg.sha512",
+    "C:\\Users\\qipt\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

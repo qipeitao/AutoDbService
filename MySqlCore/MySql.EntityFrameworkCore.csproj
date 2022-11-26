@@ -8,7 +8,6 @@
 		<PackageId>MySql.EntityFrameworkCore</PackageId>
 		<SignAssembly>False</SignAssembly>
 		<DelaySign>True</DelaySign>
-		<AssemblyOriginatorKeyFile>..\..\ConnectorNetPublicKey.snk</AssemblyOriginatorKeyFile>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<Version>200.0.17+MySQL8.0.31</Version>
@@ -30,8 +29,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\core\EFCore.Abstractions\EFCore.Abstractions.csproj" />
-		<ProjectReference Include="..\core\EFCore.Relational\EFCore.Relational.csproj" />
+		<ProjectReference Include="..\EFCores\EFCore.Abstractions\EFCore.Abstractions.csproj" />
+		<ProjectReference Include="..\EFCores\EFCore.Relational\EFCore.Relational.csproj" />
 		<ProjectReference Include="..\MySQL.Data\src\MySql.Data.csproj" />
 	</ItemGroup>
 
@@ -61,22 +60,22 @@
 	</Target>
 	
 	<ItemGroup>
-	     <ProjectReference Include="..\core\EFCore\EFCore.csproj">
+	     <ProjectReference Include="..\EFCores\EFCore\EFCore.csproj">
 		    <PrivateAssets>all</PrivateAssets> 
 		</ProjectReference>
-		<ProjectReference Include="..\core\EFCore.Abstractions\EFCore.Abstractions.csproj">
+		<ProjectReference Include="..\EFCores\EFCore.Abstractions\EFCore.Abstractions.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
-		<ProjectReference Include="..\core\EFCore.Analyzers\EFCore.Analyzers.csproj">
+		<ProjectReference Include="..\EFCores\EFCore.Analyzers\EFCore.Analyzers.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
-		<ProjectReference Include="..\core\EFCore.Cosmos\EFCore.Cosmos.csproj">
+		<ProjectReference Include="..\EFCores\EFCore.Cosmos\EFCore.Cosmos.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
-		<ProjectReference Include="..\core\EFCore.InMemory\EFCore.InMemory.csproj">
+		<ProjectReference Include="..\EFCores\EFCore.InMemory\EFCore.InMemory.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
-		<ProjectReference Include="..\core\EFCore.Proxies\EFCore.Proxies.csproj">
+		<ProjectReference Include="..\EFCores\EFCore.Proxies\EFCore.Proxies.csproj">
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
 		<ProjectReference Include="..\core\EFCore.Relational\EFCore.Relational.csproj">
