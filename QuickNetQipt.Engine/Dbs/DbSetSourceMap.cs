@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Dbs
+namespace QuickNetQipt.Engine.Dbs
 {
     public class DbSetSourceMap : IDbSetSource
     {

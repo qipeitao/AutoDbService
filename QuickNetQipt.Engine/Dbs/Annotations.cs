@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Dbs
+namespace QuickNetQipt.Engine.Dbs
 {
     [AttributeUsage(
          AttributeTargets.Method

@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Query.Internal;
-using QuickNetQipt.Lib.Extends;
-using QuickNetQipt.Lib.Utilities;
+using QuickNetQipt.Engine.Extends;
+using QuickNetQipt.Engine.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Dbs
+namespace QuickNetQipt.Engine.Dbs
 {
     public class InternalDbSetMap<TEntity> : InternalDbSet<TEntity>
         where TEntity : class

@@ -1,15 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using QuickNetQipt.Lib.Dbs;
+using QuickNetQipt.Engine.Dbs;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NotNullAttribute = QuickNetQipt.Lib.Dbs.NotNullAttribute;
+using NotNullAttribute = QuickNetQipt.Engine.Dbs.NotNullAttribute;
 
-namespace QuickNetQipt.Lib.Extends
+namespace QuickNetQipt.Engine.Extends
 {
     public static class AddCustExtends
     {

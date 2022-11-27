@@ -6,10 +6,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using QuickNetQipt.Lib.Dbs;
-using NotNullAttribute = QuickNetQipt.Lib.Dbs.NotNullAttribute;
+using QuickNetQipt.Engine.Dbs;
+using NotNullAttribute = QuickNetQipt.Engine.Dbs.NotNullAttribute;
 
-namespace QuickNetQipt.Lib.Utilities
+namespace QuickNetQipt.Engine.Utilities
 {
     [DebuggerStepThrough]
     internal static class Check

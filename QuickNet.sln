@@ -33,9 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{776E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickNetQipt.Entity", "QuickNetQipt.Entity\QuickNetQipt.Entity.csproj", "{288E8C0C-DD3E-428A-A318-1ADB5B8BF22B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickNetQipt.Engine", "QuickNetQipt.Engine\QuickNetQipt.Engine.csproj", "{7CF1A96A-740E-4B4F-882B-302E2656B2A0}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickNetQipt.Lib", "QuickNetQipt.Lib\QuickNetQipt.Lib.csproj", "{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuickNetQipt.Engine", "QuickNetQipt.Engine\QuickNetQipt.Engine.csproj", "{7CF1A96A-740E-4B4F-882B-302E2656B2A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,10 +89,6 @@ Global
 		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CF1A96A-740E-4B4F-882B-302E2656B2A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A54DEE8-AB91-4F4C-81FE-8FDB6D11864A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

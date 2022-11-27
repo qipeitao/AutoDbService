@@ -1,6 +1,6 @@
 ﻿namespace QuickNetQipt.Engine
 {
-    public class Class1
+    public class QuickNetQiptBulder
     {
 
     }

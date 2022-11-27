@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using QuickNetQipt.Entity.Entities;
-using QuickNetQipt.Lib.Dbs;
+using QuickNetQipt.Engine.Dbs;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,7 +21,7 @@ namespace QuickNetQipt.Entity
     public class MyContext : AutoMapContext
     {
         private readonly string connection = ConfigurationManager.AppSettings["DBConnection"] ?? "Server=localhost;port=3306;userid=root;password=admin;persist security info=false;charset=utf8mb4;database=bluefluent;sslMode=none;AllowPublicKeyRetrieval=true;";
-         public MyContext() : base()
+        public MyContext() : base()
         {
             //Trace.WriteLine("++++++++++++++++++++++++++++++++++++++++++");
         } 

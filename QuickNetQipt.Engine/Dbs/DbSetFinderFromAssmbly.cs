@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Dbs
+namespace QuickNetQipt.Engine.Dbs
 {
     public class DbSetFinderFromAssmbly : IDbSetFinder
     {

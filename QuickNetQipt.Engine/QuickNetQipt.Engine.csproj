@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Attributes\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.7" />
+  </ItemGroup>
+
 </Project>

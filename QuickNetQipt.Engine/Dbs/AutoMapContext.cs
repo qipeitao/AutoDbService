@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Internal;
-using QuickNetQipt.Lib.Extends;
+using QuickNetQipt.Engine.Extends;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Dbs
+namespace QuickNetQipt.Engine.Dbs
 { 
     public class AutoMapContext : DbContext
     {  

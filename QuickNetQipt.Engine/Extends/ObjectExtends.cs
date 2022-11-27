@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace QuickNetQipt.Lib.Extends
+namespace QuickNetQipt.Engine.Extends
 {
     public static class ObjectExtends
     {
