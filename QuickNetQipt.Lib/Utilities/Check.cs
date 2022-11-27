@@ -17,6 +17,8 @@ namespace QuickNetQipt.Lib.Utilities
         [ContractAnnotation("value:null => halt")]
         public static T NotNull<T>([NoEnumeration] T value, [InvokerParameterName][NotNull] string parameterName)
         {
+            List<object> s = new();
+            NotNull(s,"");
 #pragma warning disable IDE0041 // Use 'is null' check
             if (ReferenceEquals(value, null))
 #pragma warning restore IDE0041 // Use 'is null' check

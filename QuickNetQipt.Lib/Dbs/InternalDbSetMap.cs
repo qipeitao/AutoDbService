@@ -40,7 +40,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override EntityEntry<TEntity> Add(TEntity m)
         {
-            var entity = m.Map();
+            var entity = m.Copy();
             return base.Add(entity);
         }
 
@@ -54,7 +54,7 @@ namespace QuickNetQipt.Lib.Dbs
             TEntity m,
             CancellationToken cancellationToken = default)
         {
-            var entity = m.Map();
+            var entity = m.Copy();
             return base.AddAsync(entity, cancellationToken);
         }
 
@@ -66,7 +66,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override EntityEntry<TEntity> Attach(TEntity m)
         {
-            var entity = m.Map();
+            var entity = m.Copy();
             return base.Attach(entity);
         }
 
@@ -78,7 +78,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override EntityEntry<TEntity> Remove(TEntity m)
         {
-            var entity = m.Map();
+            var entity = m.Copy();
             return base.Remove(entity);
         }
 
@@ -90,7 +90,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override EntityEntry<TEntity> Update(TEntity m)
         {
-            var entity = m.Map();
+            var entity = m.Copy();
             return base.Update(entity);
         }
 
@@ -102,7 +102,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void AddRange(params TEntity[] m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.AddRange(entities);
         }
 
@@ -114,7 +114,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override Task AddRangeAsync(params TEntity[] m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             return base.AddRangeAsync(entities);
         }
 
@@ -126,7 +126,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void AttachRange(params TEntity[] m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.AttachRange(entities);
         }
 
@@ -138,7 +138,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void RemoveRange(params TEntity[] m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.RemoveRange(entities);
         }
 
@@ -150,7 +150,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void UpdateRange(params TEntity[] m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.UpdateRange(entities);
         }
 
@@ -162,7 +162,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void AddRange(IEnumerable<TEntity> m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.AddRange(entities);
         }
 
@@ -177,7 +177,7 @@ namespace QuickNetQipt.Lib.Dbs
             IEnumerable<TEntity> m,
             CancellationToken cancellationToken = default)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             return base.AddRangeAsync(entities);
         }
 
@@ -189,7 +189,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void AttachRange(IEnumerable<TEntity> m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.AttachRange(entities);
         }
 
@@ -201,7 +201,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void RemoveRange(IEnumerable<TEntity> m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.RemoveRange(entities);
         }
 
@@ -213,7 +213,7 @@ namespace QuickNetQipt.Lib.Dbs
         /// </summary>
         public override void UpdateRange(IEnumerable<TEntity> m)
         {
-            var entities = m.ToList().Map();
+            var entities = m.ToList().Copy();
             base.UpdateRange(entities);
         }
     }
