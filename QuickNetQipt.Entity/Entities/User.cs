@@ -17,9 +17,12 @@ namespace QuickNetQipt.Entity.Entities
         public Guid Id { set; get; }
         public string Name { set; get; }   
         [Column(TypeName = "char(36)")]
-        public Guid? CreateTeacherId { set; get; }
+        public Guid CreateTeacherId { set; get; }
 
         [ForeignKey("CreateTeacherId")]
-        public virtual Teacher CreateTeacher { set; get; } 
+        public virtual Teacher CreateTeacher { set; get; }
+
+ 
+        public virtual List<UserLog> UserLogs { set; get; }
     }
 }

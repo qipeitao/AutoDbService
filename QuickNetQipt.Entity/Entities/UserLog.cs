@@ -18,7 +18,7 @@ namespace QuickNetQipt.Entity.Entities
         public string Remark { set; get; }
 
         [Column(TypeName = "char(36)")]
-        public Guid? CreateUserId { set; get; } 
+        public Guid CreateUserId { set; get; } 
 
         [ForeignKey("CreateUserId")] 
         public virtual User CreateUser { set; get; }

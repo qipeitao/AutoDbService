@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuickNetQipt.Engine\QuickNetQipt.Engine.csproj" />
     <ProjectReference Include="..\QuickNetQipt.Entity\QuickNetQipt.Entity.csproj" />
   </ItemGroup>
 

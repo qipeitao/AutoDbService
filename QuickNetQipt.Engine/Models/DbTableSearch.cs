@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,8 +13,11 @@ namespace QuickNetQipt.Engine.Models
     /// <summary>
     /// 搜索dbtable类型
     /// </summary>
-    internal class SearchDbTable : ISearchTable
-    {
+    internal class DbTableSearch : IDbTableSearch
+    { 
+        public List<Type> DbTypes { private set; get; }= new List<Type>();
+      
+
         /// <summary>
         /// 实现搜索
         /// </summary>
@@ -21,9 +25,11 @@ namespace QuickNetQipt.Engine.Models
         /// <returns></returns>
         public List<Type> SearchTable(Type type)
         {
-            Assembly entityAssembly = this.GetType().Assembly;
-              return   entityAssembly.GetTypes()
-                .Where(p => IsMatch(type,p)).ToList(); 
+            if(DbTypes!=null&& DbTypes.Count!=0)return DbTypes;
+            Assembly entityAssembly = type.Assembly;
+            DbTypes = entityAssembly.GetTypes()
+              .Where(p => IsMatch(type, p)).ToList();
+            return DbTypes;
         }
         /// <summary>
         /// 匹配规则
@@ -31,9 +37,9 @@ namespace QuickNetQipt.Engine.Models
         /// <param name="context"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public virtual bool IsMatch(Type context,Type type)
+        public virtual bool IsMatch(Type context, Type type)
         {
-            return !string.IsNullOrEmpty(type.Namespace) && type.Namespace == (context.Namespace+".Entities");
+            return !string.IsNullOrEmpty(type.Namespace) && type.Namespace == (context.Namespace + ".Entities");
         }
     }
 }

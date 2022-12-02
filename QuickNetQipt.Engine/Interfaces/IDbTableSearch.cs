@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace QuickNetQipt.Engine.Interfaces
 {
-    internal interface ISearchTable
+    public interface IDbTableSearch
     {
+        List<Type> DbTypes { get; }
         List<Type> SearchTable(Type type);
+        bool IsMatch(Type context, Type type);
     }
 }
