@@ -55,3 +55,5 @@
 /AutoDbService.Wpf/obj
 /AutoDbServiceTests/bin/Debug/net6.0
 /AutoDbServiceTests/obj
+/AutoDbService.Prism/bin/Debug/net6.0-windows
+/AutoDbService.Prism/obj

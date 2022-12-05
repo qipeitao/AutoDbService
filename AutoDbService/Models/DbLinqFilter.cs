@@ -21,9 +21,14 @@ namespace AutoDbService.Models
     /// </summary>
     public class DbLinqFilter : IDbLinqFilter
     {
-        public Expression<Func<TEntity, bool>>? GetDbLinqFilter<TEntity>()
+        public Expression<Func<TEntity, bool>>? GetDbLinqFilter<TEntity>() where TEntity : EntityBase
         {
-            throw new NotImplementedException();
+            ParameterExpression source = Expression.Parameter(typeof(TEntity));
+            ParameterExpression target = Expression.Parameter(typeof(Guid));
+            var property = Expression.Property(source,nameof(EntityBase.Id));
+           var full= Expression.Assign(property, target);
+            var lamba = Expression.Lambda<Func<TEntity, bool>>(full, source, target);
+            return lamba;
         } 
       
     }
@@ -38,7 +43,7 @@ namespace AutoDbService.Models
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public IQueryable<TEntity> AutoInclude<TEntity>(IQueryable<TEntity> entities) where TEntity : class
+        public IQueryable<TEntity> AutoInclude<TEntity>(IQueryable<TEntity> entities) where TEntity : EntityBase
         {
             var ins = AutoIncludeProperty<TEntity>();
             ins?.ForEach(p =>

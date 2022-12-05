@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoDbService.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace AutoDbService.Entity.Entities
 {
-    public class Teacher
-    {
-        [Key]
-        [Column(TypeName = "char(36)")]
-        public Guid Id { set; get; }
+    public class Teacher: EntityBase
+    { 
         public string Name { set; get; }   
          
         

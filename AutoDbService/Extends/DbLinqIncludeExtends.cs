@@ -1,4 +1,5 @@
 ﻿using AutoDbService.Interfaces;
+using AutoDbService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace AutoDbService.Extends
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
-        public static IQueryable<TEntity> AutoInclude<TEntity>(this IQueryable<TEntity> entities) where TEntity : class
+        public static IQueryable<TEntity> AutoInclude<TEntity>(this IQueryable<TEntity> entities) where TEntity : EntityBase
         {
             var db = AutoDbServiceEngine.Instance.Get<IDbLinqInclude>();
             if (db == null) return entities;

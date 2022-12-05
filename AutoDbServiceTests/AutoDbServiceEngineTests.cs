@@ -105,8 +105,8 @@ namespace AutoDbService.Tests
         [TestMethod()]
         public void SetDbServiceTypeTest()
         {
-            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<object>>();
-            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbService<object>)));
+            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<EntityBase>>();
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbService<EntityBase>)));
         }
 
         [DataTestMethod()]

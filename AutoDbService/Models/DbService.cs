@@ -17,7 +17,7 @@ namespace AutoDbService.Models
     /// 实现dbset的服务基类
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public class DbService<TEntity> : IDbService<TEntity> where TEntity : class
+    public class DbService<TEntity> : IDbService<TEntity> where TEntity : EntityBase
     { 
         /// <summary>
         /// 排序规则

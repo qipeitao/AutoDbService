@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoDbService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -17,7 +18,7 @@ namespace AutoDbService.Interfaces
         /// </summary>
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
-        Expression<Func<TEntity, bool>>? GetDbLinqFilter<TEntity>();
+        Expression<Func<TEntity, bool>>? GetDbLinqFilter<TEntity>() where TEntity : EntityBase; 
     }
     /// <summary>
     /// 通用默认include实现
@@ -30,6 +31,6 @@ namespace AutoDbService.Interfaces
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="entities"></param>
         /// <returns></returns>
-        IQueryable<TEntity> AutoInclude<TEntity>(IQueryable<TEntity> entities) where TEntity : class; 
+        IQueryable<TEntity> AutoInclude<TEntity>(IQueryable<TEntity> entities) where TEntity : EntityBase; 
     }
 }

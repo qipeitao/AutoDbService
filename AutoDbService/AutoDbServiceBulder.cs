@@ -117,9 +117,9 @@ namespace AutoDbService
         /// </summary>
         /// <typeparam name="IService"></typeparam>
         /// <returns></returns>
-        public AutoDbServiceEngine SetDbServiceType<IService>() where IService : IDbService<object>
+        public AutoDbServiceEngine SetDbServiceType<IService>() where IService : IDbService<EntityBase>
         {
-            return AddTypeByType<IDbService<object>>(typeof(IService));
+            return AddTypeByType<IDbService<EntityBase>>(typeof(IService));
         }
         /// <summary>
         /// 设置数据库内容上下文
@@ -137,7 +137,7 @@ namespace AutoDbService
         public void Builder<TContext>() where TContext : AutoMapContext
         {
             AutoDbServiceEngine.Instance.SetDbSearchType<DbTableSearch>();
-            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<object>>();
+            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<EntityBase>>();
             AutoDbServiceEngine.Instance.SetDbContext<TContext>(); 
             AutoDbServiceEngine.Instance.AddType<IDbLinqFilter, DbLinqFilter>();
             AutoDbServiceEngine.Instance.AddType<IDbLinqInclude, DbLinqInclude>();

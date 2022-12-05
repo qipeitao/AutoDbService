@@ -15,8 +15,11 @@ namespace AutoDbService.Models
     /// </summary>
     public class DbTableSearch : IDbTableSearch
     { 
+        /// <summary>
+        /// 查询的全部列表
+        /// </summary>
         public List<Type> DbTypes { private set; get; }= new List<Type>();
-      
+        private  Type baseType = typeof(EntityBase);
 
         /// <summary>
         /// 实现搜索
@@ -39,7 +42,8 @@ namespace AutoDbService.Models
         /// <returns></returns>
         public virtual bool IsMatch(Type context, Type type)
         {
-            return !string.IsNullOrEmpty(type.Namespace) && type.Namespace == (context.Namespace + ".Entities");
+            return !string.IsNullOrEmpty(type.Namespace) && type.Namespace == (context.Namespace + ".Entities")
+                &&type.BaseType== baseType;
         }
     }
 }

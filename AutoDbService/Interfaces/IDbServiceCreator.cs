@@ -19,6 +19,6 @@ namespace AutoDbService.Interfaces
         /// 获取库表服务
         /// </summary>
         /// <returns>key:Type of TEntity; Value:Service</returns>
-        Dictionary<Type,object> CreateDbService();
+        Dictionary<Type, object> CreateDbService();
     }
 }

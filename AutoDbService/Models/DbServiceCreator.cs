@@ -21,7 +21,7 @@ namespace AutoDbService.Models
             var tables = AutoDbServiceEngine.Instance.Get<IDbTableSearch>()?.DbTypes;
             if (tables == null || tables.Count == 0) return null;
             //////////////
-            var dbServerObj = AutoDbServiceEngine.Instance.Get<IDbService<object>>();
+            var dbServerObj = AutoDbServiceEngine.Instance.Get<IDbService<EntityBase>>();
             var baseType = dbServerObj.GetType().GetGenericTypeDefinition();
             var rs = tables.Select(p => {
                 var t = baseType.MakeGenericType(p);
