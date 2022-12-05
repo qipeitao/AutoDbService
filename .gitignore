@@ -47,3 +47,9 @@
 /QuickNetQipt.Lib/obj
 /QuickNetQipt.Lib/bin/Debug/net6.0
 /src/obj/Debug/netstandard2.1
+/AutoDbService/bin/Debug/net6.0
+/AutoDbService/obj
+/AutoDbService.Entity/bin/Debug/net6.0
+/AutoDbService.Entity/obj
+/AutoDbService.Wpf/bin/Debug/net6.0-windows
+/AutoDbService.Wpf/obj

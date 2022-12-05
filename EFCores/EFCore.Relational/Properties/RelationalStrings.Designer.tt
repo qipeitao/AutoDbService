@@ -1,5 +1,0 @@
-<#
-    Session["ResourceFile"] = "RelationalStrings.resx";
-    Session["LoggingDefinitionsClass"] = "RelationalLoggingDefinitions";
-#>
-<#@ include file="..\..\..\tools\Resources.tt" #>
