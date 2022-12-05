@@ -44,7 +44,7 @@ namespace AutoDbService
         /// <param name="obj">实例</param>
         /// <param name="instance">是否单例。单例：自动生成一份，其他随用随生成</param>
         /// <returns></returns>
-        public AutoDbServiceEngine AddType(Type key, Type targetType, object obj, bool instance = true)
+        public AutoDbServiceEngine AddType([NotNull] Type key, [NotNull] Type targetType, object obj, bool instance = true)
         {
             if (!serviceDics.ContainsKey(key))
             {
@@ -56,7 +56,7 @@ namespace AutoDbService
         {
             return AddType(typeof(IService), typeof(Service), null, instance);
         }
-        private AutoDbServiceEngine AddTypeByValue(Type key, object obj, bool instance = true)
+        private AutoDbServiceEngine AddTypeByValue([NotNull] Type key, object obj, bool instance = true)
         {
             return AddType(key, obj.GetType(), obj, instance);
         }
@@ -68,7 +68,7 @@ namespace AutoDbService
         /// 删除类型 
         /// </summary>
         /// <param name="type"></param>
-        public void RemoveType(Type type)
+        public void RemoveType([NotNull] Type type)
         {
             if (serviceDics.ContainsKey(type))
             {
@@ -87,12 +87,16 @@ namespace AutoDbService
         /// 替换服务
         /// </summary>
         /// <typeparam name="IService">被替换的服务类型</typeparam>
-        /// <param name="v">替换的服务实例</param>
+        /// <param name="v">替换的服务实例,不能为空</param>
         /// <param name="instance"></param>
-        public void ReplaceServiceValue<IService>(IService v, bool instance = true)
+        public void ReplaceServiceValue<IService>([NotNull]IService v, bool instance = true)
         {
+            if(v==null)
+            {
+                return;
+            }
             if (serviceDics.ContainsKey(typeof(IService)))
-                serviceDics[typeof(IService)] = new Tuple<Type, object>(v.GetType(), instance ? v : null);
+                serviceDics[typeof(IService)] = new Tuple<Type, object>(v.GetType(), instance ? v: null);
         }
         /// <summary>
         /// 设置搜寻数据实体服务
@@ -180,7 +184,49 @@ namespace AutoDbService
         {
             return (IService)this[typeof(IService)];
         }
-    
+    /// <summary>
+    /// 是否注册类型
+    /// </summary>
+    /// <typeparam name="IService"></typeparam>
+    /// <returns></returns>
+        public virtual bool IsRegister<IService>()
+        {
+            return IsRegister(typeof(IService));
+        }
+        /// <summary>
+        /// 是否注册类型
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public virtual bool IsRegister(Type type)
+        {
+            return serviceDics.ContainsKey(type);
+        }
+        /// <summary>
+        /// 是否拥有实例
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
+        /// <returns></returns>
+        public virtual bool HasInstance<IService>()
+        {
+            return HasInstance(typeof(IService));
+        }
+        /// <summary>
+        /// 是否拥有实例
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public virtual bool HasInstance(Type type)
+        {
+            if (serviceDics.ContainsKey(type))
+            {
+                return serviceDics[type].Item2 !=null;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private object CreateObjByType(Type type)
         {
             return Activator.CreateInstance(type);

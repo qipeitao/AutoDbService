@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AutoDbService.Entity\AutoDbService.Entity.csproj" />
     <ProjectReference Include="..\AutoDbService\AutoDbService.csproj" />
   </ItemGroup>
 

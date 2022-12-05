@@ -13,7 +13,7 @@ namespace AutoDbService.Models
     /// <summary>
     /// 搜索dbtable类型
     /// </summary>
-    internal class DbTableSearch : IDbTableSearch
+    public class DbTableSearch : IDbTableSearch
     { 
         public List<Type> DbTypes { private set; get; }= new List<Type>();
       

@@ -5,94 +5,144 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoDbService.Interfaces;
+using AutoDbService.Models;
+using AutoDbService.Entity;
+using AutoDbService.Dbs;
 
 namespace AutoDbService.Tests
 {
     [TestClass()]
     public class AutoDbServiceEngineTests
     {
-        [TestMethod()]
-        public void AddTypeTest()
+
+        private static DbTableSearch _DbTableSearch;
+        [TestInitialize]
+        public void Init()
         {
-            Assert.Fail();
+            _DbTableSearch=new DbTableSearch();
+        }
+        [TestCleanup]
+        public void Clear()
+        {
+            AutoDbServiceEngine.Instance.Dispose();
+        }
+        public static IEnumerable<object[]> AddTypeTest_GetData()
+        {
+            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), null, false };
+            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), null, true };
+            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), _DbTableSearch, false };
+            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), _DbTableSearch, false };
+        } 
+
+        [DataTestMethod()]
+        [DynamicData(nameof(AddTypeTest_GetData), DynamicDataSourceType.Method)]
+        public void AddTypeTest(Type key,Type targetType,object obj,bool inst=true)
+        {
+            AutoDbServiceEngine.Instance.AddType(key,targetType,obj,inst); 
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(key));
+            if(inst&&obj!=null)
+            {
+                Assert.IsTrue(AutoDbServiceEngine.Instance.HasInstance(key));
+                Assert.AreEqual(AutoDbServiceEngine.Instance[key],obj);
+            }
+            else if(inst && obj == null)
+            {
+                Assert.IsTrue(AutoDbServiceEngine.Instance.HasInstance(key));
+                Assert.AreNotEqual(AutoDbServiceEngine.Instance[key], obj);
+            }
+            else if (!inst && obj != null)
+            {
+                Assert.IsFalse(AutoDbServiceEngine.Instance.HasInstance(key));
+                Assert.AreNotEqual(AutoDbServiceEngine.Instance[key], obj);
+            }
+            else if (!inst && obj == null)
+            {
+                Assert.IsFalse(AutoDbServiceEngine.Instance.HasInstance(key));
+                Assert.AreNotEqual(AutoDbServiceEngine.Instance[key], obj);
+            } 
         }
 
-        [TestMethod()]
-        public void AddTypeTest1()
+        [DataTestMethod()]
+        [DynamicData(nameof(AddTypeTest_GetData), DynamicDataSourceType.Method)]
+        public void RemoveTypeTest(Type key, Type targetType, object obj, bool inst = true)
         {
-            Assert.Fail();
+            AutoDbServiceEngine.Instance.AddType(key, targetType, obj, inst);
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(key));
+            AutoDbServiceEngine.Instance.RemoveType(key);
+            Assert.IsFalse(AutoDbServiceEngine.Instance.IsRegister(key));
         }
 
-        [TestMethod()]
-        public void AddTypeByValueTest()
-        {
-            Assert.Fail();
-        }
 
-        [TestMethod()]
-        public void AddTypeByTypeTest()
+        [DataTestMethod()]
+        [DynamicData(nameof(AddTypeTest_GetData), DynamicDataSourceType.Method)]
+        public void ReplaceServiceValueTest(Type key, Type targetType, IDbTableSearch obj, bool inst = true)
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void RemoveTypeTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void RemoveTypeTest1()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void ReplaceServiceValueTest()
-        {
-            Assert.Fail();
+            AutoDbServiceEngine.Instance.Builder<MyContext>();
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(key));
+            Assert.IsNotNull(AutoDbServiceEngine.Instance[key]);
+            AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbTableSearch>(obj,inst);
+            if(inst&& obj!=null)
+            {
+                Assert.AreEqual(AutoDbServiceEngine.Instance[key],obj);
+            }  
         }
 
         [TestMethod()]
         public void SetDbSearchTypeTest()
         {
-            Assert.Fail();
+            AutoDbServiceEngine.Instance.SetDbSearchType<DbTableSearch>();
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbTableSearch)));
         }
 
         [TestMethod()]
-        public void SetDbSetTypeTest()
+        public void SetDbServiceTypeTest()
         {
-            Assert.Fail();
+            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<object>>();
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbService<object>)));
         }
 
-        [TestMethod()]
-        public void SetDbLinqFilterTest()
+        [DataTestMethod()]
+        [DataRow(typeof(IDbTableSearch))]
+        [DataRow(typeof(IDbLinqInclude))]
+        [DataRow(typeof(AutoMapContext))]
+        public void BuilderTest(Type type)
         {
-            Assert.Fail();
+            Assert.IsNull(AutoDbServiceEngine.Instance[type]);
+            Assert.IsFalse(AutoDbServiceEngine.Instance.IsRegister(type));
+
+            AutoDbServiceEngine.Instance.Builder<MyContext>();
+
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(type));
+            Assert.IsNotNull(AutoDbServiceEngine.Instance[type]);
+
+            AutoDbServiceEngine.Instance.Dispose();
+
+            Assert.IsFalse(AutoDbServiceEngine.Instance.IsRegister(type));
+            Assert.IsNull(AutoDbServiceEngine.Instance[type]);
         }
 
-        [TestMethod()]
-        public void UseAutoCreateDbServiceTest()
+        [DataTestMethod()]
+        [DataRow(typeof(IDbTableSearch))]
+        [DataRow(typeof(IDbLinqInclude))]
+        [DataRow(typeof(AutoMapContext))]
+        public void GetTest(Type type)
         {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void BuilderTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
-        public void GetTest()
-        {
-            Assert.Fail();
+            Assert.IsNull(AutoDbServiceEngine.Instance[typeof(IDbTableSearch)]);
+            AutoDbServiceEngine.Instance.Builder<MyContext>();
+            Assert.IsNotNull(AutoDbServiceEngine.Instance.Get<IDbTableSearch>());
+            Assert.AreEqual(AutoDbServiceEngine.Instance.Get<IDbTableSearch>(), AutoDbServiceEngine.Instance[typeof(IDbTableSearch)]);
+            AutoDbServiceEngine.Instance.Dispose();
+            Assert.IsNull(AutoDbServiceEngine.Instance.Get<IDbTableSearch>());
         }
 
         [TestMethod()]
         public void DisposeTest()
         {
-            Assert.Fail();
+            AutoDbServiceEngine.Instance.Builder<MyContext>();
+            Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbTableSearch)));
+            AutoDbServiceEngine.Instance.Dispose();
+            Assert.IsFalse(AutoDbServiceEngine.Instance.IsRegister(typeof(IDbTableSearch)));
         }
     }
 }
