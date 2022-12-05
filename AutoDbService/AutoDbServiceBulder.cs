@@ -89,14 +89,18 @@ namespace AutoDbService
         /// <typeparam name="IService">被替换的服务类型</typeparam>
         /// <param name="v">替换的服务实例,不能为空</param>
         /// <param name="instance"></param>
-        public void ReplaceServiceValue<IService>([NotNull]IService v, bool instance = true)
+        public bool ReplaceServiceValue<IService>([NotNull]IService v, bool instance = true)
         {
             if(v==null)
             {
-                return;
+                return false;
             }
             if (serviceDics.ContainsKey(typeof(IService)))
-                serviceDics[typeof(IService)] = new Tuple<Type, object>(v.GetType(), instance ? v: null);
+            {
+                serviceDics[typeof(IService)] = new Tuple<Type, object>(v.GetType(), instance ? v : null);
+                return true;
+            }
+            return false;
         }
         /// <summary>
         /// 设置搜寻数据实体服务

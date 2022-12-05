@@ -17,10 +17,12 @@ namespace AutoDbService.Tests
     {
 
         private static DbTableSearch _DbTableSearch;
+        private static DbLinqInclude _DbLinqInclude;
         [TestInitialize]
         public void Init()
         {
             _DbTableSearch=new DbTableSearch();
+            _DbLinqInclude = new DbLinqInclude();
         }
         [TestCleanup]
         public void Clear()
@@ -32,7 +34,12 @@ namespace AutoDbService.Tests
             yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), null, false };
             yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), null, true };
             yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), _DbTableSearch, false };
-            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), _DbTableSearch, false };
+            yield return new object[] { typeof(IDbTableSearch), typeof(DbTableSearch), _DbTableSearch, true };
+            ////////////////////////////////////////
+            yield return new object[] { typeof(IDbLinqInclude), typeof(DbTableSearch), null, false };
+            yield return new object[] { typeof(IDbLinqInclude), typeof(DbTableSearch), null, true };
+            yield return new object[] { typeof(IDbLinqInclude), typeof(DbTableSearch), _DbLinqInclude, false };
+            yield return new object[] { typeof(IDbLinqInclude), typeof(DbTableSearch), _DbLinqInclude, true };
         } 
 
         [DataTestMethod()]
@@ -76,13 +83,13 @@ namespace AutoDbService.Tests
 
         [DataTestMethod()]
         [DynamicData(nameof(AddTypeTest_GetData), DynamicDataSourceType.Method)]
-        public void ReplaceServiceValueTest(Type key, Type targetType, IDbTableSearch obj, bool inst = true)
+        public void ReplaceServiceValueTest(Type key, Type targetType, object obj, bool inst = true)
         {
             AutoDbServiceEngine.Instance.Builder<MyContext>();
             Assert.IsTrue(AutoDbServiceEngine.Instance.IsRegister(key));
             Assert.IsNotNull(AutoDbServiceEngine.Instance[key]);
-            AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbTableSearch>(obj,inst);
-            if(inst&& obj!=null)
+           var result= AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbTableSearch>(obj as IDbTableSearch, inst); 
+            if(inst&& obj!=null&& result)
             {
                 Assert.AreEqual(AutoDbServiceEngine.Instance[key],obj);
             }  
