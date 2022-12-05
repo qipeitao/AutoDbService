@@ -13,6 +13,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoDbService.Models
 {
+    /// <summary>
+    /// 实现dbset的服务基类
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class DbService<TEntity> : IDbService<TEntity> where TEntity : class
     { 
         /// <summary>
@@ -44,6 +48,11 @@ namespace AutoDbService.Models
         }
          
         #region Get 
+        /// <summary>
+        /// 查询一个
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
 
         public virtual TEntity GetBaseOneFromDb(Expression<Func<TEntity, bool>> filter = default)
         {
@@ -53,6 +62,15 @@ namespace AutoDbService.Models
             }
         }
         #endregion 
+        /// <summary>
+        /// 查询多个
+        /// </summary>
+        /// <param name="count">全部条数</param>
+        /// <param name="filter">过滤条件</param>
+        /// <param name="orderBy">排序条件</param>
+        /// <param name="funExtends">扩展方法(默认采用自动include)</param>
+        /// <param name="enginePage">分页（最小每页5条数据）</param>
+        /// <returns></returns>
         public virtual Task<List<TEntity>> GetListFromDb(out int count, Expression<Func<TEntity, bool>>? filter = default,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = default,
             Func<IQueryable<TEntity>, IQueryable<TEntity>> funExtends = default, EnginePage enginePage = default)
@@ -88,6 +106,11 @@ namespace AutoDbService.Models
                 return query.ToListAsync();
             }
         }
+        /// <summary>
+        /// 新增数据
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public virtual bool Add(TEntity obj)
         {
             if (obj == null) return false;
@@ -97,7 +120,11 @@ namespace AutoDbService.Models
                 return db.SaveChanges() > 0;
             }
         }
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public virtual bool Remove(TEntity obj)
         {
             if (obj == null) return false;
@@ -107,6 +134,11 @@ namespace AutoDbService.Models
                 return db.SaveChanges() > 0;
             }
         }
+        /// <summary>
+        /// 保存
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public virtual Boolean Save(TEntity obj)
         {
             if (obj == null) return false;
@@ -119,6 +151,7 @@ namespace AutoDbService.Models
 
         /// <summary>
         /// 填充model
+        /// 采用默认扩展_funExtends
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="parmas"></param>

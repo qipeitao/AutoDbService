@@ -19,6 +19,10 @@ using System.Threading.Tasks;
 
 namespace AutoDbService.Dbs
 {
+    /// <summary>
+    /// 实现automap的的dbset
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
     public class InternalDbSetMap<TEntity> : InternalDbSet<TEntity>
         where TEntity : class
     {

@@ -27,8 +27,17 @@ namespace AutoDbService.Models
         } 
       
     }
-    public  class DbLinqInclude : IDbLinqInclude
+    /// <summary>
+    /// 通用默认include实现
+    /// </summary>
+    public class DbLinqInclude : IDbLinqInclude
     { 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="entities"></param>
+        /// <returns></returns>
         public IQueryable<TEntity> AutoInclude<TEntity>(IQueryable<TEntity> entities) where TEntity : class
         {
             var ins = AutoIncludeProperty<TEntity>();

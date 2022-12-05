@@ -11,6 +11,7 @@ namespace AutoDbService.Interfaces
 {
     /// <summary>
     /// 基础服务接口
+    /// 默认服务创建器
     /// </summary>
     public interface IDbServiceCreator
     { 

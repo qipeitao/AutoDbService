@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace AutoDbService.Dbs
 {
+    /// <summary>
+    /// 自定义创建参数
+    /// </summary>
     public class CustmDbContextOptionsExtension : IDbContextOptionsExtension
     {
         private DbContextOptionsExtensionInfo _info;

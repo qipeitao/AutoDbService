@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace AutoDbService.Models
 {
+    /// <summary>
+    /// 默认服务创建器
+    /// </summary>
     public class DbServiceCreator : IDbServiceCreator
     {
+        /// <summary>
+        /// 创建dbservice
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<Type, object> CreateDbService()
         {
             var tables = AutoDbServiceEngine.Instance.Get<IDbTableSearch>()?.DbTypes;

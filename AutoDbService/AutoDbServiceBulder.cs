@@ -8,6 +8,9 @@ using Type = System.Type;
 
 namespace AutoDbService
 {
+    /// <summary>
+    /// 服务编辑器
+    /// </summary>
     public class AutoDbServiceEngine : IDisposable
     {
         public readonly Type DbContextTypeKey = typeof(AutoMapContext);
@@ -33,7 +36,14 @@ namespace AutoDbService
                 return AutoDbServiceBulder;
             }
         }
-         
+        /// <summary>
+        /// 新增类型
+        /// </summary>
+        /// <param name="key">关键字</param>
+        /// <param name="targetType">目标类型</param>
+        /// <param name="obj">实例</param>
+        /// <param name="instance">是否单例。单例：自动生成一份，其他随用随生成</param>
+        /// <returns></returns>
         public AutoDbServiceEngine AddType(Type key, Type targetType, object obj, bool instance = true)
         {
             if (!serviceDics.ContainsKey(key))
@@ -42,19 +52,22 @@ namespace AutoDbService
             }
             return this;
         }
-        public AutoDbServiceEngine AddType<IService, Service>(bool instance = true) where Service : class, IService
+        private AutoDbServiceEngine AddType<IService, Service>(bool instance = true) where Service : class, IService
         {
             return AddType(typeof(IService), typeof(Service), null, instance);
         }
-        public AutoDbServiceEngine AddTypeByValue(Type key, object obj, bool instance = true)
+        private AutoDbServiceEngine AddTypeByValue(Type key, object obj, bool instance = true)
         {
             return AddType(key, obj.GetType(), obj, instance);
         }
-        public AutoDbServiceEngine AddTypeByType<IService>(Type value, bool instance = true)
+        private AutoDbServiceEngine AddTypeByType<IService>(Type value, bool instance = true)
         {
             return AddType(typeof(IService), value, null, instance); ;
         }
-
+        /// <summary>
+        /// 删除类型 
+        /// </summary>
+        /// <param name="type"></param>
         public void RemoveType(Type type)
         {
             if (serviceDics.ContainsKey(type))
@@ -62,45 +75,63 @@ namespace AutoDbService
                 serviceDics.Remove(type);
             }
         }
+        /// <summary>
+        /// 删除类型
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
         public void RemoveType<IService>()
         {
             RemoveType(typeof(IService));
         }
+        /// <summary>
+        /// 替换服务
+        /// </summary>
+        /// <typeparam name="IService">被替换的服务类型</typeparam>
+        /// <param name="v">替换的服务实例</param>
+        /// <param name="instance"></param>
         public void ReplaceServiceValue<IService>(IService v, bool instance = true)
         {
             if (serviceDics.ContainsKey(typeof(IService)))
                 serviceDics[typeof(IService)] = new Tuple<Type, object>(v.GetType(), instance ? v : null);
         }
+        /// <summary>
+        /// 设置搜寻数据实体服务
+        /// </summary>
+        /// <typeparam name="Service"></typeparam>
+        /// <returns></returns>
         public AutoDbServiceEngine SetDbSearchType<Service>() where Service : class, IDbTableSearch
         {
             return AddType<IDbTableSearch, Service>();
         }
-        public AutoDbServiceEngine SetDbSetType<IService>() where IService : IDbService<object>
+        /// <summary>
+        /// 设置内置dbservice服务基类
+        /// 引擎将用此基类进行服务创建
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
+        /// <returns></returns>
+        public AutoDbServiceEngine SetDbServiceType<IService>() where IService : IDbService<object>
         {
             return AddTypeByType<IDbService<object>>(typeof(IService));
         }
+        /// <summary>
+        /// 设置数据库内容上下文
+        /// </summary>
+        /// <typeparam name="TContext">需继承与AutoMapContext</typeparam>
+        /// <returns></returns>
         private AutoDbServiceEngine SetDbContext<TContext>() where TContext : AutoMapContext
         {
             return AddType<AutoMapContext, TContext>(false);
         }
-        public AutoDbServiceEngine SetDbLinqFilter<T>() where T : IDbLinqFilter
-        {
-            return AddType<IDbLinqFilter, DbLinqFilter>();
-        }
-        public AutoDbServiceEngine UseAutoCreateDbService<TEntity, TContext>()
-            where TContext : DbService<TEntity>
-            where TEntity: class
-        {
-            return AddType<DbService<TEntity>, TContext>();
-        }
-
-
+     /// <summary>
+     /// 创建构建环境
+     /// </summary>
+     /// <typeparam name="TContext"></typeparam>
         public void Builder<TContext>() where TContext : AutoMapContext
         {
             AutoDbServiceEngine.Instance.SetDbSearchType<DbTableSearch>();
-            AutoDbServiceEngine.Instance.SetDbSetType<DbService<object>>();
-            AutoDbServiceEngine.Instance.SetDbContext<TContext>();
-            AutoDbServiceEngine.Instance.SetDbLinqFilter<DbLinqFilter>();
+            AutoDbServiceEngine.Instance.SetDbServiceType<DbService<object>>();
+            AutoDbServiceEngine.Instance.SetDbContext<TContext>(); 
+            AutoDbServiceEngine.Instance.AddType<IDbLinqFilter, DbLinqFilter>();
             AutoDbServiceEngine.Instance.AddType<IDbLinqInclude, DbLinqInclude>();
             AutoDbServiceEngine.Instance.AddType<IDbServiceCreator, DbServiceCreator>();
 
@@ -140,7 +171,11 @@ namespace AutoDbService
                return this[DbContextTypeKey] as AutoMapContext;
             }
         }
-
+        /// <summary>
+        /// 获取服务对应的实例
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
+        /// <returns></returns>
         public virtual IService Get<IService>()
         {
             return (IService)this[typeof(IService)];
@@ -150,7 +185,9 @@ namespace AutoDbService
         {
             return Activator.CreateInstance(type);
         }
-
+        /// <summary>
+        /// 资源释放
+        /// </summary>
         public void Dispose()
         {
             serviceDics.Clear();
