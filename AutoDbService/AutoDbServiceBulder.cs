@@ -52,7 +52,7 @@ namespace AutoDbService
             }
             return this;
         }
-        private AutoDbServiceEngine AddType<IService, Service>(bool instance = true) where Service : class, IService
+        public AutoDbServiceEngine AddType<IService, Service>(bool instance = true) where Service : class, IService
         {
             return AddType(typeof(IService), typeof(Service), null, instance);
         }

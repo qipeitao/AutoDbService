@@ -1,4 +1,6 @@
 ﻿using AutoDbService.Interfaces;
+using AutoDbService.Models;
+using AutoDbService.Prism.Interfaces;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Prism.Events;
 using Prism.Ioc;
@@ -18,7 +20,7 @@ namespace AutoDbService.Prism.Models
     /// 实现一个dbservice
     /// 实现通用 curd
     /// </summary>
-    public class InfoManagerViewModel<TEntity> : EngineBindableBase where TEntity : class
+    public class InfoManagerViewModel<TEntity> : EngineBindableBase, IInfoManagerViewModel<TEntity> where TEntity : EntityBase
     {
  
         public virtual string AddEntityDialogName { set; get; }
@@ -32,7 +34,7 @@ namespace AutoDbService.Prism.Models
         #region ICommand
         #region AddCommand
 
-        protected virtual void AddEntity()
+        public virtual void AddEntity()
         {
             DialogService.ShowDialog(AddEntityDialogName, new DialogParameters(), r =>
             {
@@ -49,7 +51,7 @@ namespace AutoDbService.Prism.Models
 
         #endregion
         #region ModifyCommand   
-        protected virtual void ModifyEntity(TEntity entity)
+        public virtual void ModifyEntity(TEntity entity)
         {
             DialogParameters keyValuePairs = new DialogParameters
             {
@@ -70,7 +72,7 @@ namespace AutoDbService.Prism.Models
         #endregion
 
         #region RemoveCommand 
-        protected virtual void RemoveEntity(TEntity s)
+        public virtual void RemoveEntity(TEntity s)
         {
             DbService?.Remove(s);
         }
