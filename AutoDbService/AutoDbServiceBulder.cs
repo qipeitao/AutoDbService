@@ -143,6 +143,11 @@ namespace AutoDbService
             AutoDbServiceEngine.Instance.AddType<IDbLinqInclude, DbLinqInclude>();
             AutoDbServiceEngine.Instance.AddType<IDbServiceCreator, DbServiceCreator>();
 
+            serviceDics.Where(p => p.Value.Item2 != null)
+                       .Select(p => p.Value.Item2)
+                       .OfType<IStart>()
+                       .ToList()
+                       .ForEach(p => p.Start()); 
             Get<IDbTableSearch>().SearchTable(this[typeof(AutoMapContext)].GetType());
             var tableService = Get<IDbServiceCreator>().CreateDbService();
             tableService?.ToList().ForEach(p => { 
@@ -240,6 +245,11 @@ namespace AutoDbService
         /// </summary>
         public void Dispose()
         {
+            serviceDics.Where(p => p.Value.Item2 != null)
+                       .Select(p => p.Value.Item2)
+                       .OfType<IStop>()
+                       .ToList()
+                       .ForEach(p => p.Stop());
             serviceDics.Clear();
         }
     }

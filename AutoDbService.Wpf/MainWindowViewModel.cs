@@ -13,7 +13,7 @@ using System.Windows.Threading;
 using System.Windows;
 using Unity;
 using AutoDbService.Entity;
-using AutoDbService.Entity.Entities; 
+using AutoDbService.Entity.Entities;
 using System.Reflection.Emit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -26,18 +26,20 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions.Infrastructure;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using Microsoft.EntityFrameworkCore.Internal; 
+using Microsoft.EntityFrameworkCore.Internal;
 using AutoDbService.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Google.Protobuf.WellKnownTypes;
 using System.Windows.Markup;
 using AutoDbService.Extends;
 using AutoDbService.Models;
-using AutoDbService.DbPrism.Extends;
 using Prism.Mvvm;
+using AutoDbService.DbPrism.Models;
+using AutoDbService.DbPrism.Interfaces;
+using AutoDbService.DbPrism;
 
 namespace AutoDbService.Wpf
-{ 
+{
     public class MMM: BindableBase
     {
         public virtual string Name { set; get; }
@@ -56,11 +58,14 @@ namespace AutoDbService.Wpf
     }
     public class MainWindowViewModel: BindableBase
     { 
+        public MMM MM { set; get; }
         public MainWindowViewModel()
         {
             try
             {
-                AutoDbServiceEngine.Instance.Builder<MyContext>();
+                AutoDbServiceEngine.Instance
+                    .UsePrism() 
+                    .Builder<MyContext>();
 
                 AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbService<User>>(new DbService<User>(s=>s.OrderBy(t=>t.Id),s=>s.Include(t=>t.CreateTeacher)));
                 var service= AutoDbServiceEngine.Instance.Get<IDbService<User>>();
@@ -84,16 +89,13 @@ namespace AutoDbService.Wpf
             {
 
             }
-
-            
-           var type= typeof(MMM).BuildDynamicClass();
-            var ms = type.GetRuntimeProperties().ToList();
-            var ss= Activator.CreateInstance(type) as MMM;
-            ss.PropertyChanged += MainWindowViewModel_PropertyChanged;
-            ss.Name = "aaaaaa";
-            ss.Name = "bbbbb";
-            ss.Add();
-            ss.And(10);
+            MM = AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType<MMM>(); 
+            MM.PropertyChanged += MainWindowViewModel_PropertyChanged;
+            MM.Name = "aaaaaa";
+            MM.Name = "bbbbb";
+            MM.Add();
+            MM.And(10);
+            var listt=  MM.GetType().GetRuntimeProperties().ToList();
         }
 
         private void MainWindowViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

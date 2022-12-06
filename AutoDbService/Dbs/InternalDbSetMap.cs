@@ -27,33 +27,30 @@ namespace AutoDbService.Dbs
         where TEntity : class
     {
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="context"></param>
+        /// <param name="entityTypeName"></param>
         public InternalDbSetMap([NotNull] DbContext context, string entityTypeName) : base(context, entityTypeName)
         {
 
         }
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public override EntityEntry<TEntity> Add(TEntity m)
         {
             var entity = m.Copy();
             return base.Add(entity);
         }
-
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override ValueTask<EntityEntry<TEntity>> AddAsync(
             TEntity m,
             CancellationToken cancellationToken = default)
@@ -63,11 +60,10 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public override EntityEntry<TEntity> Attach(TEntity m)
         {
             var entity = m.Copy();
@@ -75,11 +71,10 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public override EntityEntry<TEntity> Remove(TEntity m)
         {
             var entity = m.Copy();
@@ -87,11 +82,10 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public override EntityEntry<TEntity> Update(TEntity m)
         {
             var entity = m.Copy();
@@ -99,11 +93,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void AddRange(params TEntity[] m)
         {
             var entities = m.ToList().Copy();
@@ -111,11 +103,10 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public override Task AddRangeAsync(params TEntity[] m)
         {
             var entities = m.ToList().Copy();
@@ -123,11 +114,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void AttachRange(params TEntity[] m)
         {
             var entities = m.ToList().Copy();
@@ -135,11 +124,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void RemoveRange(params TEntity[] m)
         {
             var entities = m.ToList().Copy();
@@ -147,11 +134,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void UpdateRange(params TEntity[] m)
         {
             var entities = m.ToList().Copy();
@@ -159,11 +144,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void AddRange(IEnumerable<TEntity> m)
         {
             var entities = m.ToList().Copy();
@@ -172,11 +155,11 @@ namespace AutoDbService.Dbs
 
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public override Task AddRangeAsync(
             IEnumerable<TEntity> m,
             CancellationToken cancellationToken = default)
@@ -186,11 +169,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void AttachRange(IEnumerable<TEntity> m)
         {
             var entities = m.ToList().Copy();
@@ -198,11 +179,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void RemoveRange(IEnumerable<TEntity> m)
         {
             var entities = m.ToList().Copy();
@@ -210,11 +189,9 @@ namespace AutoDbService.Dbs
         }
 
         /// <summary>
-        ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-        ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-        ///     any release. You should only use it directly in your code with extreme caution and knowing that
-        ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+        /// 
         /// </summary>
+        /// <param name="m"></param>
         public override void UpdateRange(IEnumerable<TEntity> m)
         {
             var entities = m.ToList().Copy();
