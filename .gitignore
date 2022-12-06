@@ -57,3 +57,5 @@
 /AutoDbServiceTests/obj
 /AutoDbService.Prism/bin/Debug/net6.0-windows
 /AutoDbService.Prism/obj
+/ConsoleApp1/bin/Debug/net6.0
+/ConsoleApp1/obj

@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 
-namespace AutoDbService.Prism.Models
+namespace AutoDbService.DbPrism.Models
 {
     /// <summary>
     /// vm基类

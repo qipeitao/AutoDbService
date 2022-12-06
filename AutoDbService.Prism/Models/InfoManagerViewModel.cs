@@ -1,6 +1,6 @@
 ﻿using AutoDbService.Interfaces;
 using AutoDbService.Models;
-using AutoDbService.Prism.Interfaces;
+using AutoDbService.DbPrism.Interfaces;
 using Org.BouncyCastle.Asn1.Ocsp;
 using Prism.Events;
 using Prism.Ioc;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity;
 
-namespace AutoDbService.Prism.Models
+namespace AutoDbService.DbPrism.Models
 {
     /// <summary>
     /// 信息管理类基类

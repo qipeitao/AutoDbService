@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoDbService.Prism.Interfaces
+namespace AutoDbService.DbPrism.Interfaces
 {
     public interface IInfoManagerViewModel<TEntity>  where TEntity : EntityBase
     {

@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoDbService.Entity\AutoDbService.Entity.csproj" />
+    <ProjectReference Include="..\AutoDbService.Prism\AutoDbService.DbPrism.csproj" />
     <ProjectReference Include="..\AutoDbService\AutoDbService.csproj" />
   </ItemGroup>
 

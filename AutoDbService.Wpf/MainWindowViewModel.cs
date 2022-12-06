@@ -33,12 +33,30 @@ using Google.Protobuf.WellKnownTypes;
 using System.Windows.Markup;
 using AutoDbService.Extends;
 using AutoDbService.Models;
+using AutoDbService.DbPrism.Extends;
+using Prism.Mvvm;
 
 namespace AutoDbService.Wpf
 { 
-    public class MainWindowViewModel
+    public class MMM: BindableBase
+    {
+        public virtual string Name { set; get; }
+        public virtual void Add()
+        {
+            Trace.WriteLine($"MMM--Add:");
+        }
+        public void Or()
+        {
+            Trace.WriteLine($"MMM--or:");
+        }
+        public virtual void And(int n)
+        {
+            Trace.WriteLine($"MMM--And:{n}");
+        }
+    }
+    public class MainWindowViewModel: BindableBase
     { 
-        public MainWindowViewModel() : base()
+        public MainWindowViewModel()
         {
             try
             {
@@ -66,6 +84,23 @@ namespace AutoDbService.Wpf
             {
 
             }
-        } 
+
+            
+           var type= typeof(MMM).BuildDynamicClass();
+            var ms = type.GetRuntimeProperties().ToList();
+            var ss= Activator.CreateInstance(type) as MMM;
+            ss.PropertyChanged += MainWindowViewModel_PropertyChanged;
+            ss.Name = "aaaaaa";
+            ss.Name = "bbbbb";
+            ss.Add();
+            ss.And(10);
+        }
+
+        private void MainWindowViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Trace.WriteLine($"=======PropertyChanged:{e.PropertyName}");
+        }
+
+        public virtual string Name { set; get; }
     }
 }

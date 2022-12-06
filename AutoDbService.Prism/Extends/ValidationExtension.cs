@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AutoDbService.Prism.Extends
+namespace AutoDbService.DbPrism.Extends
 {
     public static class ValidationExtension
     {

@@ -1,9 +1,9 @@
 using AutoDbService.Models;
-using AutoDbService.Prism.Interfaces;
-using AutoDbService.Prism.Models;
+using AutoDbService.DbPrism.Interfaces;
+using AutoDbService.DbPrism.Models;
 using System;
 
-namespace AutoDbService.Prism
+namespace AutoDbService.DbPrism
 {
     public static class AutoDbServiceEngineExtends
     {

@@ -1,6 +1,6 @@
 ﻿using AutoDbService.Interfaces;
 using AutoDbService.Models;
-using AutoDbService.Prism.Extends;
+using AutoDbService.DbPrism.Extends;
 using Prism.Commands;
 using Prism.Services.Dialogs;
 using System;
@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AutoDbService.Prism.Models
+namespace AutoDbService.DbPrism.Models
 {
     public partial class ModifyViewModel<TEntity> : AddViewModel<TEntity> where TEntity:EntityBase,new()
     {
