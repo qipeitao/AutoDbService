@@ -19,7 +19,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E012F981
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDbService.DbPrism", "AutoDbService.Prism\AutoDbService.DbPrism.csproj", "{14E9009B-39B1-4A0B-84C4-27EBB61E5B70}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{349F4059-14E9-469C-BB0D-CD6AB1DE3F1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{349F4059-14E9-469C-BB0D-CD6AB1DE3F1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDb", "AutoDb\AutoDb.csproj", "{A7D6C407-343A-4D76-8F87-039F37344AF2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoDb.DbPrism", "AutoDb.Prism\AutoDb.DbPrism.csproj", "{E482186C-5EBF-41D1-93F5-666A659F77CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{349F4059-14E9-469C-BB0D-CD6AB1DE3F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{349F4059-14E9-469C-BB0D-CD6AB1DE3F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{349F4059-14E9-469C-BB0D-CD6AB1DE3F1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D6C407-343A-4D76-8F87-039F37344AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D6C407-343A-4D76-8F87-039F37344AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D6C407-343A-4D76-8F87-039F37344AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D6C407-343A-4D76-8F87-039F37344AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E482186C-5EBF-41D1-93F5-666A659F77CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E482186C-5EBF-41D1-93F5-666A659F77CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E482186C-5EBF-41D1-93F5-666A659F77CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E482186C-5EBF-41D1-93F5-666A659F77CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
