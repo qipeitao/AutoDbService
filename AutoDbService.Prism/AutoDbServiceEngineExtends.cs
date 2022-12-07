@@ -10,6 +10,8 @@ namespace AutoDbService.DbPrism
         public static AutoDbServiceEngine UsePrism(this AutoDbServiceEngine engine)
         {
             engine.AddType<IInfoManagerViewModel<EntityBase>, InfoManagerViewModel<EntityBase>>(false);
+            engine.AddType<IAddViewModel<EntityBase>, AddViewModel<EntityBase>>(false);
+            engine.AddType<IModifyViewModel<EntityBase>, ModifyViewModel<EntityBase>>(false);
             engine.AddType<IBuildDynamicType, BuildDynamicType>();
             //engine.AddType<IDynamicTypeClear, DynamicTypeClear>();
             
