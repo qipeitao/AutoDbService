@@ -42,10 +42,10 @@ namespace AutoDbService.Wpf
     public class MMM: EngineBindableBase
     {
         public virtual string Name { set; get; }
-        //public virtual void Add()
-        //{
-        //    Trace.WriteLine($"MMM--Add:");
-        //}
+        public virtual void Add()
+        {
+            Trace.WriteLine($"MMM--Add:");
+        }
         //public void Or()
         //{
         //    Trace.WriteLine($"MMM--or:");
