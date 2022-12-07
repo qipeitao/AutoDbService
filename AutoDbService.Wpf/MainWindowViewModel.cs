@@ -47,14 +47,14 @@ namespace AutoDbService.Wpf
         {
             Trace.WriteLine($"MMM--Add:");
         }
-        public void Or()
-        {
-            Trace.WriteLine($"MMM--or:");
-        }
-        public virtual void And(int n)
-        {
-            Trace.WriteLine($"MMM--And:{n}");
-        }
+        //public void Or()
+        //{
+        //    Trace.WriteLine($"MMM--or:");
+        //}
+        //public virtual void And(int n)
+        //{
+        //    Trace.WriteLine($"MMM--And:{n}");
+        //}
     }
     public class MainWindowViewModel: BindableBase
     { 
@@ -93,9 +93,11 @@ namespace AutoDbService.Wpf
             MM.PropertyChanged += MainWindowViewModel_PropertyChanged;
             MM.Name = "aaaaaa";
             MM.Name = "bbbbb";
-            MM.Add();
-            MM.And(10);
-            var listt=  MM.GetType().GetRuntimeProperties().ToList();
+             MM.Add();
+            //MM.And(10);
+            var listt=  MM.GetType().GetRuntimeProperties().FirstOrDefault(p=>p.Name.EndsWith("Command"));
+           var command= listt.GetValue(MM) as ICommand;
+            command.Execute(null);
         }
 
         private void MainWindowViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AutoDbService.DbPrism.Models
 {
@@ -31,12 +32,14 @@ namespace AutoDbService.DbPrism.Models
         }
         private  Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder> BuildDynamicClass(Type source)
         {
-            AssemblyName myAsmName = source.Assembly.GetName();
+            AssemblyName myAsmName = new AssemblyName(source.Name+Guid.NewGuid().ToString("N"));// source.Assembly.GetName();
+            string myModuleName = source.Name +"ModuleCLI";
+            string myTypeName = source.Name + "TypeCLI";
             // To generate a persistable assembly, specify AssemblyBuilderAccess.RunAndSave.
             AssemblyBuilder myAsmBuilder = AssemblyBuilder.DefineDynamicAssembly(myAsmName, AssemblyBuilderAccess.Run);
             //// Generate a persistable single-module assembly.
-            ModuleBuilder myModBuilder = myAsmBuilder.DefineDynamicModule(myAsmName.Name);
-            TypeBuilder myTypeBuilder = myModBuilder.DefineType(source.Name + Guid.NewGuid() + "-CLI", TypeAttributes.Public, source);
+            ModuleBuilder myModBuilder = myAsmBuilder.DefineDynamicModule(myModuleName);
+            TypeBuilder myTypeBuilder = myModBuilder.DefineType(myTypeName, TypeAttributes.Public, source);
             source.GetProperties().ToList().ForEach(p =>
             {
                 myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p.Name);
@@ -45,7 +48,7 @@ namespace AutoDbService.DbPrism.Models
             {
                 if (p.DeclaringType == source && !p.Name.StartsWith("get_") && !p.Name.StartsWith("set_") && p.IsPublic && p.IsVirtual)
                 {
-                    myTypeBuilder = BuildDynamicClassWithCommands(myTypeBuilder, p);
+                    myTypeBuilder = BuildDynamicClassWithCommands(myTypeBuilder, p); 
                 }
             });
             return new Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder>(myAsmBuilder, myModBuilder, myTypeBuilder); 
@@ -116,6 +119,83 @@ namespace AutoDbService.DbPrism.Models
             return myTypeBuilder;
         }
 
+        //private TypeBuilder BuildDynamicClassWithCommands(TypeBuilder myTypeBuilder, MethodInfo baseMethod)
+        //{
+        //    var argumentTypes = baseMethod.GetGenericArguments();
+        //    if (argumentTypes.Length > 1)
+        //    {
+        //        return myTypeBuilder;
+        //    }
+        //    Type argumentActionType = typeof(Action<>);
+        //    if (argumentTypes.Length > 0)
+        //    {
+        //        argumentActionType = argumentActionType.MakeGenericType(argumentTypes[0]);
+        //    }
+        //    Type argumentType = typeof(DelegateCommand<>);//
+        //    if (argumentTypes.Length > 0)
+        //    {
+        //        argumentType = argumentType.MakeGenericType(argumentTypes[0]);
+        //    }
+        //    FieldBuilder customerNameBldr = myTypeBuilder.DefineField("my" + baseMethod.Name,
+        //                                                    typeof(ICommand),
+        //                                                    FieldAttributes.Private | FieldAttributes.HasDefault);
+
+        //    PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(baseMethod.Name + "Command",
+        //                                                     PropertyAttributes.None,
+        //                                                    CallingConventions.HasThis,
+        //                                                     typeof(ICommand), null);
+
+        //    custNamePropBldr.GetRequiredCustomModifiers();
+
+        //    //The property set and property get methods require a special
+        //    // set of attributes.
+        //    MethodAttributes getSetAttr =
+        //        MethodAttributes.Public | MethodAttributes.SpecialName |
+        //            MethodAttributes.HideBySig
+        //            | MethodAttributes.Virtual;
+
+        //    // Define the "get" accessor method for CustomerName.
+        //    MethodBuilder custNameGetPropMthdBldr =
+        //        myTypeBuilder.DefineMethod("get_" + baseMethod.Name + "Command",
+        //                                   getSetAttr,
+        //                                   typeof(ICommand),
+        //                                   Type.EmptyTypes);
+           
+        //    ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
+        //    var labEndIf = custNameGetIL.DefineLabel();
+        //    var labEnd = custNameGetIL.DefineLabel();
+        //    custNameGetIL.Emit(OpCodes.Nop);
+        //    custNameGetIL.Emit(OpCodes.Ldarg_0);
+        //    custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
+        //    custNameGetIL.Emit(OpCodes.Ldnull);
+        //    custNameGetIL.Emit(OpCodes.Ceq);
+
+        //    custNameGetIL.Emit(OpCodes.Stloc_0);
+        //    custNameGetIL.Emit(OpCodes.Ldloc_0);
+        //    custNameGetIL.Emit(OpCodes.Brfalse_S, labEndIf);
+        //    custNameGetIL.Emit(OpCodes.Nop);
+        //    custNameGetIL.Emit(OpCodes.Ldarg_0);
+        //    custNameGetIL.Emit(OpCodes.Ldnull);
+        //    custNameGetIL.Emit(OpCodes.Ldftn, baseMethod);
+
+        //    custNameGetIL.Emit(OpCodes.Newobj, argumentActionType.GetConstructors().FirstOrDefault());
+        //    custNameGetIL.Emit(OpCodes.Newobj, argumentType.GetConstructors().FirstOrDefault(p=>p.GetParameters().Length==1));
+
+        //    custNameGetIL.Emit(OpCodes.Stfld, customerNameBldr);
+        //    custNameGetIL.Emit(OpCodes.Nop);
+        //    custNameGetIL.MarkLabel(labEndIf); 
+
+        //    custNameGetIL.Emit(OpCodes.Ldarg_0);
+        //    custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
+        //    custNameGetIL.Emit(OpCodes.Stloc_1);
+        //    custNameGetIL.Emit(OpCodes.Br_S, labEnd);
+        //    custNameGetIL.MarkLabel(labEnd);
+        //    custNameGetIL.Emit(OpCodes.Ldloc_1);
+        //    custNameGetIL.Emit(OpCodes.Ret);
+
+        //    custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr);
+        //    return myTypeBuilder;
+        //}
         private TypeBuilder BuildDynamicClassWithCommands(TypeBuilder myTypeBuilder, MethodInfo baseMethod)
         {
             var argumentTypes = baseMethod.GetGenericArguments();
@@ -123,24 +203,16 @@ namespace AutoDbService.DbPrism.Models
             {
                 return myTypeBuilder;
             }
-            Type argumentActionType = typeof(Action<>);
-            if (argumentTypes.Length > 0)
-            {
-                argumentActionType = argumentActionType.MakeGenericType(argumentTypes[0]);
-            }
-            Type argumentType = typeof(DelegateCommand);//
-            if (argumentTypes.Length > 0)
-            {
-                argumentType = argumentType.MakeGenericType(argumentTypes[0]);
-            }
+            Type argumentActionType = typeof(Action); 
+            Type argumentType = typeof(DelegateCommand);// 
             FieldBuilder customerNameBldr = myTypeBuilder.DefineField("my" + baseMethod.Name,
-                                                            typeof(DelegateCommand),
+                                                            typeof(ICommand),
                                                             FieldAttributes.Private | FieldAttributes.HasDefault);
 
             PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(baseMethod.Name + "Command",
                                                              PropertyAttributes.None,
                                                             CallingConventions.HasThis,
-                                                             typeof(DelegateCommand), null);
+                                                             typeof(ICommand), null);
 
             custNamePropBldr.GetRequiredCustomModifiers();
 
@@ -153,38 +225,39 @@ namespace AutoDbService.DbPrism.Models
 
             // Define the "get" accessor method for CustomerName.
             MethodBuilder custNameGetPropMthdBldr =
-                myTypeBuilder.DefineMethod("get_" + baseMethod.Name + "Command",
+                myTypeBuilder.DefineMethod("get_" + custNamePropBldr.Name,
                                            getSetAttr,
-                                           typeof(string),
+                                           typeof(ICommand),
                                            Type.EmptyTypes);
 
             ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
+            var labEndIf = custNameGetIL.DefineLabel();
+            var labEnd = custNameGetIL.DefineLabel();
             custNameGetIL.Emit(OpCodes.Nop);
             custNameGetIL.Emit(OpCodes.Ldarg_0);
             custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
-            custNameGetIL.Emit(OpCodes.Ldnull);
-            custNameGetIL.Emit(OpCodes.Ceq);
-            custNameGetIL.Emit(OpCodes.Stloc_0);
-            custNameGetIL.Emit(OpCodes.Ldloc_0);
-            custNameGetIL.Emit(OpCodes.Brfalse_S);
-            custNameGetIL.Emit(OpCodes.Nop);
+            custNameGetIL.Emit(OpCodes.Dup);
+            custNameGetIL.Emit(OpCodes.Brtrue_S, labEndIf);
+            custNameGetIL.Emit(OpCodes.Pop);
             custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.Emit(OpCodes.Ldnull);
+            custNameGetIL.Emit(OpCodes.Ldarg_0);
+
             custNameGetIL.Emit(OpCodes.Ldftn, baseMethod);
+            custNameGetIL.Emit(OpCodes.Newobj, argumentActionType.GetConstructors().FirstOrDefault());
+            custNameGetIL.Emit(OpCodes.Newobj, argumentType.GetConstructors().FirstOrDefault(p => p.GetParameters().Length == 1));
 
-            custNameGetIL.Emit(OpCodes.Newobj, argumentActionType);
-            custNameGetIL.Emit(OpCodes.Newobj, argumentType);
-
+            custNameGetIL.Emit(OpCodes.Dup);
+            custNameGetIL.Emit(OpCodes.Stloc_0);
             custNameGetIL.Emit(OpCodes.Stfld, customerNameBldr);
-            custNameGetIL.Emit(OpCodes.Nop);
             custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
+            custNameGetIL.MarkLabel(labEndIf);
             custNameGetIL.Emit(OpCodes.Stloc_1);
-            custNameGetIL.Emit(OpCodes.Br_S);
+            custNameGetIL.Emit(OpCodes.Br_S, labEnd);
+            custNameGetIL.MarkLabel(labEnd);
             custNameGetIL.Emit(OpCodes.Ldloc_1);
             custNameGetIL.Emit(OpCodes.Ret);
-
-            custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr);
+             
+            custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr); 
             return myTypeBuilder;
         }
     }

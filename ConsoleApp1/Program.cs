@@ -1,4 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Prism.Commands;
+using System.Windows.Input;
+
 public static class Progrom
 {
     public class SS<Tpye>
@@ -11,19 +14,18 @@ public static class Progrom
     }
     public class M
     {
-        private object name;
-        public object Name
+        private ICommand name;
+        public ICommand Name
         {
             get
-            {
-                if (name == null)
-                {
-                    name = new SS<int>(OnSS);
-                }
-                return name;
+            { 
+                return name ??= new DelegateCommand(OnSS);
             }
         }
+        public  void OnSS()
+        {
 
+        }
         private int index;
         public int Index
         {
@@ -49,8 +51,5 @@ public static class Progrom
 
         Console.WriteLine("Hello, World!");
     }
-    public static void OnSS(int s)
-    {
-
-    }
+   
 }
