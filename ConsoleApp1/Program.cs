@@ -36,6 +36,7 @@ public static class Progrom
                 RaisePropertyChanged(nameof(Index));
             }
         } 
+        public object Value { set; get; }
         protected void RaisePropertyChanged(string propertyName = null)
         {
 

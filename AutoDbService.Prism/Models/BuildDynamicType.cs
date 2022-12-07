@@ -27,7 +27,14 @@ namespace AutoDbService.DbPrism.Models
             //////////////////////////////////////////////////////////
             type = builder.Item3.CreateType();
             TType obj=  builder.Item1.CreateInstance(type.FullName) as TType; 
-            dynamicTypeClear.AddObj(obj, builder);
+
+            var mb = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p=>p.Name== "SetCommandWhenNull"); 
+            type.GetRuntimeFields().Where(p => p.Name.EndsWith("Command"))
+                 .ToList().ForEach(p =>
+                 {
+                     var method = type.GetMethod(p.Name.Replace("Command", "").Replace("my", "")); 
+                    mb.Invoke(obj, new object[] { p.Name, method }); 
+                 });  
             return obj;
         }
         private  Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder> BuildDynamicClass(Type source)
@@ -50,7 +57,7 @@ namespace AutoDbService.DbPrism.Models
                 {
                     myTypeBuilder = BuildDynamicClassWithCommands(myTypeBuilder, p); 
                 }
-            });
+            }); 
             return new Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder>(myAsmBuilder, myModBuilder, myTypeBuilder); 
         }
         private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, string propertyName)
@@ -202,10 +209,8 @@ namespace AutoDbService.DbPrism.Models
             if (argumentTypes.Length > 1)
             {
                 return myTypeBuilder;
-            }
-            Type argumentActionType = typeof(Action); 
-            Type argumentType = typeof(DelegateCommand);// 
-            FieldBuilder customerNameBldr = myTypeBuilder.DefineField("my" + baseMethod.Name,
+            } 
+            FieldBuilder customerNameBldr = myTypeBuilder.DefineField("my" + baseMethod.Name + "Command",
                                                             typeof(ICommand),
                                                             FieldAttributes.Private | FieldAttributes.HasDefault);
 
@@ -231,30 +236,10 @@ namespace AutoDbService.DbPrism.Models
                                            Type.EmptyTypes);
 
             ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
-            var labEndIf = custNameGetIL.DefineLabel();
-            var labEnd = custNameGetIL.DefineLabel();
+          
             custNameGetIL.Emit(OpCodes.Nop);
             custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
-            custNameGetIL.Emit(OpCodes.Dup);
-            custNameGetIL.Emit(OpCodes.Brtrue_S, labEndIf);
-            custNameGetIL.Emit(OpCodes.Pop);
-            custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.Emit(OpCodes.Ldarg_0);
-
-            custNameGetIL.Emit(OpCodes.Ldftn, baseMethod);
-            custNameGetIL.Emit(OpCodes.Newobj, argumentActionType.GetConstructors().FirstOrDefault());
-            custNameGetIL.Emit(OpCodes.Newobj, argumentType.GetConstructors().FirstOrDefault(p => p.GetParameters().Length == 1));
-
-            custNameGetIL.Emit(OpCodes.Dup);
-            custNameGetIL.Emit(OpCodes.Stloc_0);
-            custNameGetIL.Emit(OpCodes.Stfld, customerNameBldr);
-            custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.MarkLabel(labEndIf);
-            custNameGetIL.Emit(OpCodes.Stloc_1);
-            custNameGetIL.Emit(OpCodes.Br_S, labEnd);
-            custNameGetIL.MarkLabel(labEnd);
-            custNameGetIL.Emit(OpCodes.Ldloc_1);
+            custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr); 
             custNameGetIL.Emit(OpCodes.Ret);
              
             custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr); 

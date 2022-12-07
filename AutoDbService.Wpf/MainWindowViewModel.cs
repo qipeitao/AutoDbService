@@ -1,5 +1,4 @@
-﻿using Microsoft.Xaml.Behaviors.Layout;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Regions;
 using System;
 using System.Collections.Generic;
@@ -40,21 +39,21 @@ using AutoDbService.DbPrism;
 
 namespace AutoDbService.Wpf
 {
-    public class MMM: BindableBase
+    public class MMM: EngineBindableBase
     {
         public virtual string Name { set; get; }
-        public virtual void Add()
-        {
-            Trace.WriteLine($"MMM--Add:");
-        }
+        //public virtual void Add()
+        //{
+        //    Trace.WriteLine($"MMM--Add:");
+        //}
         //public void Or()
         //{
         //    Trace.WriteLine($"MMM--or:");
         //}
-        //public virtual void And(int n)
-        //{
-        //    Trace.WriteLine($"MMM--And:{n}");
-        //}
+        public virtual void And(int? n)
+        {
+            Trace.WriteLine($"MMM--And:{n}");
+        }
     }
     public class MainWindowViewModel: BindableBase
     { 
@@ -93,8 +92,8 @@ namespace AutoDbService.Wpf
             MM.PropertyChanged += MainWindowViewModel_PropertyChanged;
             MM.Name = "aaaaaa";
             MM.Name = "bbbbb";
-             MM.Add();
-            //MM.And(10);
+             //MM.Add();
+            MM.And(10);
             var listt=  MM.GetType().GetRuntimeProperties().FirstOrDefault(p=>p.Name.EndsWith("Command"));
            var command= listt.GetValue(MM) as ICommand;
             command.Execute(null);

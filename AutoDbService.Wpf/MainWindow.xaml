@@ -13,7 +13,7 @@
             <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Content="Button" Command="{Binding AddCommand}" DataContext="{Binding MM}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Button" Command="{Binding AndCommand}" DataContext="{Binding MM}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainRegion">
            
         </ContentControl>
