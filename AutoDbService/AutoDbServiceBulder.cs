@@ -193,11 +193,31 @@ namespace AutoDbService
         {
             return (IService)this[typeof(IService)];
         }
-    /// <summary>
-    /// 是否注册类型
-    /// </summary>
-    /// <typeparam name="IService"></typeparam>
-    /// <returns></returns>
+        /// <summary>
+        /// 获取服务对应类型
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
+        /// <returns></returns>
+        public virtual Type GetType<IService>()
+        {
+            return GetType(typeof(IService));
+        }
+        public virtual Type GetType(Type type)
+        {
+            if (serviceDics.ContainsKey(type))
+            {
+                return serviceDics[type].Item1;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// 是否注册类型
+        /// </summary>
+        /// <typeparam name="IService"></typeparam>
+        /// <returns></returns>
         public virtual bool IsRegister<IService>()
         {
             return IsRegister(typeof(IService));

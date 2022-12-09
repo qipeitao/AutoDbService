@@ -12,5 +12,6 @@ namespace AutoDbService.DbPrism.Interfaces
     public interface IBuildDynamicType
     {  
         TType BuildType<TType>() where TType : BindableBase;
+        object BuildType(Type type);
     }
 }

@@ -1,4 +1,5 @@
-﻿using AutoDbService.DbPrism.Interfaces;
+﻿using AutoDbService.DbPrism.Attributes;
+using AutoDbService.DbPrism.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -16,43 +17,43 @@ namespace AutoDbService.DbPrism.Models
     { 
         private  MethodInfo? RaisePropertyChangedInfo = typeof(BindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged");
         private MethodInfo? SetCommandWhenNullInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "SetCommandWhenNull");
-        public const string FieldPreName = "my";
-        public const string FieldLastName = "Command";
         
-        private string GetMethodNameByFieldName(string fieldName)
-        {
-            return fieldName.Replace(FieldPreName,"").Replace(FieldLastName,"");
+        private IPropertyAndCommandConvertName PropertyAndCommandConvertName {
+            get => AutoDbServiceEngine.Instance.Get<IPropertyAndCommandConvertName>();
         }
-        private bool IsMyField(string p)
+        public object BuildType(Type baseType)
         {
-            return p.EndsWith(FieldLastName) && p.StartsWith(FieldPreName);
-        }
-        public TType BuildType<TType>() where TType : BindableBase
-        {
-            var  builder= BuildDynamicClass(typeof(TType));
-             
+            var builder = BuildDynamicClass(baseType);
+
             //////////////////////////////////////////////////////////
             var type = builder.Item3.CreateType();
-            if(type==null)
+            if (type == null)
             {
                 throw new Exception("创建失败!");
             }
-            TType? obj= Activator.CreateInstance(type) as TType;  
-            if(obj==null)
+            object? obj = Activator.CreateInstance(type);
+            if (obj == null)
             {
                 throw new Exception("创建失败!");
             }
             //////默认初始化赋值
             if (SetCommandWhenNullInfo != null)
             {
-                type.GetRuntimeFields().Where(p => p.IsPublic == false && IsMyField(p.Name))
+                type.GetRuntimeFields().Where(p => p.IsPublic == false && PropertyAndCommandConvertName.IsMyCommandField(p.Name))
                      .ToList().ForEach(p =>
                      {
-                         var method = type.GetMethod(GetMethodNameByFieldName(p.Name));
-                         SetCommandWhenNullInfo.Invoke(obj, new object[] { p.Name, method });
+                         var method = type.GetMethod(PropertyAndCommandConvertName.GetMethodNameByFieldCommandName(p.Name));
+                         if (method != null)
+                         {
+                             SetCommandWhenNullInfo.Invoke(obj, new object[] { p.Name, method });
+                         }
                      });
             }
             return obj;
+        }
+        public TType BuildType<TType>() where TType : BindableBase
+        { 
+            return BuildType(typeof(TType)) as TType;
         }
         private  Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder> BuildDynamicClass(Type source)
         {
@@ -64,22 +65,21 @@ namespace AutoDbService.DbPrism.Models
             //// Generate a persistable single-module assembly.
             ModuleBuilder myModBuilder = myAsmBuilder.DefineDynamicModule(myModuleName);
             TypeBuilder myTypeBuilder = myModBuilder.DefineType(myTypeName, TypeAttributes.Public, source);
-            source.GetProperties().ToList().ForEach(p =>
+            source.GetProperties().Where(p=>p.GetCustomAttribute<BindingPropertyAttribute>()!=null)
+                .ToList().ForEach(p =>
             {
                 myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p.Name);
             });
-            source.GetMethods().ToList().ForEach(p =>
+            source.GetMethods().Where(p => p.GetCustomAttribute<CommandAttribute>()!=null)
+                .ToList().ForEach(p =>
             {
-                if (p.DeclaringType == source && !p.Name.StartsWith("get_") && !p.Name.StartsWith("set_") && p.IsPublic && p.IsVirtual)
-                {
-                    myTypeBuilder = BuildDynamicClassWithCommands(myTypeBuilder, p); 
-                }
+                myTypeBuilder = BuildDynamicClassWithCommands(myTypeBuilder, p);
             }); 
             return new Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder>(myAsmBuilder, myModBuilder, myTypeBuilder); 
         }
         private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, string propertyName)
         {
-            FieldBuilder customerNameBldr = myTypeBuilder.DefineField(FieldPreName + propertyName,
+            FieldBuilder customerNameBldr = myTypeBuilder.DefineField(PropertyAndCommandConvertName.GetFieldByProperty(propertyName),
                                                             typeof(string),
                                                             FieldAttributes.Private | FieldAttributes.HasDefault);
 
@@ -100,7 +100,7 @@ namespace AutoDbService.DbPrism.Models
 
             // Define the "get" accessor method for CustomerName.
             MethodBuilder custNameGetPropMthdBldr =
-                myTypeBuilder.DefineMethod("get_" + propertyName,
+                myTypeBuilder.DefineMethod("get_" + custNamePropBldr.Name,
                                            getSetAttr,
                                            typeof(string),
                                            Type.EmptyTypes);
@@ -117,7 +117,7 @@ namespace AutoDbService.DbPrism.Models
 
             // Define the "set" accessor method for CustomerName.
             MethodBuilder custNameSetPropMthdBldr =
-                myTypeBuilder.DefineMethod("set_" + propertyName,
+                myTypeBuilder.DefineMethod("set_" + custNamePropBldr.Name,
                                            getSetAttr,
                                            null,
                                            new Type[] { typeof(string) });
@@ -227,11 +227,10 @@ namespace AutoDbService.DbPrism.Models
             {
                 return myTypeBuilder;
             } 
-            FieldBuilder customerNameBldr = myTypeBuilder.DefineField(FieldPreName + baseMethod.Name + FieldLastName,
+            FieldBuilder customerNameBldr = myTypeBuilder.DefineField(PropertyAndCommandConvertName.GetFieldCommandByMethod(baseMethod.Name),
                                                             typeof(ICommand),
-                                                            FieldAttributes.Private | FieldAttributes.HasDefault);
-
-            PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(baseMethod.Name + FieldLastName,
+                                                            FieldAttributes.Private | FieldAttributes.HasDefault); 
+            PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(PropertyAndCommandConvertName.GetPropertyCommandByMethod(baseMethod.Name),
                                                              PropertyAttributes.None,
                                                             CallingConventions.HasThis,
                                                              typeof(ICommand), null);

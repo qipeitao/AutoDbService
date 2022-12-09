@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace AutoDbService.DbPrism.Models
 {
-    public partial class ModifyViewModel<TEntity> : AddViewModel<TEntity> where TEntity:EntityBase,new()
+    public  class ModifyViewModel<TEntity> : AddViewModel<TEntity>,IModifyViewModel<TEntity> where TEntity:EntityBase,new()
     {
         #region baseinfo
 
