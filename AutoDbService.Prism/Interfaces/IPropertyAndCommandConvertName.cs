@@ -14,6 +14,9 @@ using System.Reflection;
 
 namespace AutoDbService.DbPrism.Interfaces
 {
+    /// <summary>
+    /// VM自动创建时，重新创建绑定关系时 属性名称转换关系 
+    /// </summary>
     public interface IPropertyAndCommandConvertName
     {
         /// <summary>

@@ -14,6 +14,7 @@ namespace AutoDbService.DbPrism
             engine.AddType<IModifyViewModel<EntityBase>, IModifyViewModel<EntityBase>>(false);
             engine.AddType<IBuildDynamicType, BuildDynamicType>();
             engine.AddType<IPropertyAndCommandConvertName, PropertyAndCommandConvertName>();
+            engine.AddType<IPrismModuleRegisterService, PrismModuleRegisterService>();
             
             //engine.AddType<IDynamicTypeClear, DynamicTypeClear>();
 
