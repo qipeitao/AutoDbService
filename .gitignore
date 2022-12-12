@@ -64,3 +64,13 @@
 /AutoDb.Prism/bin/Debug/net6.0-windows
 /AutoDb.Prism/obj
 /27262/29080/30898/13867
+/AutoDb/bin/Debug
+/AutoDb.DbPrism/bin/Debug
+/AutoDb.DbPrism/obj/Debug
+/AutoDb.Entity/bin/Debug
+/AutoDb.Entity/obj/Debug
+/AutoDb.Wpf/bin/Debug
+/AutoDb.Wpf/obj/Debug
+/AutoDbTests/bin/Debug
+/AutoDbTests/obj/Debug
+/packages
