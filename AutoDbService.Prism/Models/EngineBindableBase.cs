@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -113,7 +114,10 @@ namespace AutoDbService.DbPrism.Models
                 RegionManager.RequestNavigate(regName, viewName, para);
             }
         }
-
+        //public void RaiseProperty(string propertyName)
+        //{
+        //    RaisePropertyChanged(propertyName);
+        //}
     }
 
     public abstract class DialogEngineBindableBase : EngineBindableBase, IDialogAware, IDataErrorInfo

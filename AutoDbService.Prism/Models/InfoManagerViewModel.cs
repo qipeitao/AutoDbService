@@ -87,9 +87,11 @@ namespace AutoDbService.DbPrism.Models
 
         [Command]
         public async void Query()
-        { 
-            //var ls=(await DbService.GetListFromDb(out int n, p => true));
-            //List=ls;
+        {
+            List = "";
+            //List = List ?? new List<TEntity>(); 
+            //var ls = (await DbService.GetListFromDb(out int n, p => true));
+            //List.AddRange(ls);
         }
     }
 }

@@ -4,6 +4,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -15,7 +16,7 @@ namespace AutoDbService.DbPrism.Models
 {
     public class BuildDynamicType: IBuildDynamicType
     { 
-        private  MethodInfo? RaisePropertyChangedInfo = typeof(BindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged");
+        private  MethodInfo? RaisePropertyChangedInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged");
         private MethodInfo? SetCommandWhenNullInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "SetCommandWhenNull");
         
         private IPropertyAndCommandConvertName PropertyAndCommandConvertName {
@@ -77,7 +78,7 @@ namespace AutoDbService.DbPrism.Models
             source.GetProperties().Where(p=>p.GetCustomAttribute<BindingPropertyAttribute>()!=null)
                 .ToList().ForEach(p =>
             {
-                myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p);
+                myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p, source);
             });
             source.GetMethods().Where(p => p.GetCustomAttribute<CommandAttribute>()!=null)
                 .ToList().ForEach(p =>
@@ -86,7 +87,7 @@ namespace AutoDbService.DbPrism.Models
             }); 
             return new Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder>(myAsmBuilder, myModBuilder, myTypeBuilder); 
         }
-        private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, PropertyInfo propertyInfo)
+        private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, PropertyInfo propertyInfo, Type source)
         {
             FieldBuilder customerNameBldr = myTypeBuilder.DefineField(PropertyAndCommandConvertName.GetFieldByProperty(propertyInfo.Name),
                                                             propertyInfo.PropertyType,
@@ -95,7 +96,7 @@ namespace AutoDbService.DbPrism.Models
             PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(propertyInfo.Name,
                                                              PropertyAttributes.None,
                                                             CallingConventions.HasThis,
-                                                              propertyInfo.PropertyType, null
+                                                            propertyInfo.PropertyType, null
                                                               );
 
             custNamePropBldr.GetRequiredCustomModifiers();
@@ -103,25 +104,19 @@ namespace AutoDbService.DbPrism.Models
             //The property set and property get methods require a special
             // set of attributes.
             MethodAttributes getSetAttr =
-                MethodAttributes.Public | MethodAttributes.SpecialName |
-                    MethodAttributes.HideBySig
-                    | MethodAttributes.Virtual;
+                MethodAttributes.Public | MethodAttributes.SpecialName|MethodAttributes.HideBySig| MethodAttributes.Virtual;
 
             // Define the "get" accessor method for CustomerName.
             MethodBuilder custNameGetPropMthdBldr =
                 myTypeBuilder.DefineMethod("get_" + custNamePropBldr.Name,
                                            getSetAttr,
-                                            propertyInfo.PropertyType,
+                                           propertyInfo.PropertyType,
                                            Type.EmptyTypes);
 
             ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
-
-            custNameGetIL.Emit(OpCodes.Nop);
+             
             custNameGetIL.Emit(OpCodes.Ldarg_0);
-            custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr);
-            custNameGetIL.Emit(OpCodes.Stloc_0);
-            custNameGetIL.Emit(OpCodes.Br_S);
-            custNameGetIL.Emit(OpCodes.Ldarg_0);
+            custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr); 
             custNameGetIL.Emit(OpCodes.Ret);
 
             // Define the "set" accessor method for CustomerName.
@@ -132,18 +127,15 @@ namespace AutoDbService.DbPrism.Models
                                            new Type[] { propertyInfo.PropertyType });
 
             ILGenerator custNameSetIL = custNameSetPropMthdBldr.GetILGenerator();
+           
 
-            custNameGetIL.Emit(OpCodes.Nop);
-
-            custNameSetIL.Emit(OpCodes.Ldarg_0);
-            custNameSetIL.Emit(OpCodes.Ldarg_1);
-
-            custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr);
-            custNameSetIL.Emit(OpCodes.Ldarg_0);
+            custNameSetIL.Emit(OpCodes.Ldarg_0); 
+            custNameSetIL.Emit(OpCodes.Ldarg_1); 
+            custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr); 
 
             custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);
-            custNameSetIL.Emit(OpCodes.Call, RaisePropertyChangedInfo);
-            custNameGetIL.Emit(OpCodes.Nop);
+            custNameSetIL.Emit(OpCodes.Call, source.GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged"));
+            //custNameSetIL.Emit(OpCodes.Call, typeof(Trace).GetMethod("WriteLine",new Type[] { typeof(string)}));
             custNameSetIL.Emit(OpCodes.Ret);
 
             custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr);

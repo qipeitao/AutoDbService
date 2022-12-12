@@ -61,7 +61,8 @@ namespace AutoDbService.Wpf
         public MainWindowViewModel()
         {
             try
-            { 
+            {
+               
                 //AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbService<User>>(new DbService<User>(s=>s.OrderBy(t=>t.Id),s=>s.Include(t=>t.CreateTeacher)));
                 //var service= AutoDbServiceEngine.Instance.Get<IDbService<User>>();
                 //var list=   service.GetListFromDb(out int n);
