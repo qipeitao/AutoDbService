@@ -29,11 +29,10 @@ namespace AutoDbService.DbPrism.Models
         public virtual string AddEntityDialogName { set; get; }
         public virtual string ModifyEntityDialogName { set; get; }
         public virtual IDbService<TEntity> DbService { get; set; }
-         
-        public virtual List<string> List { set; get; }
 
         [BindingProperty]
-        public virtual string Items { set; get; }
+        public virtual ObservableCollection<TEntity> List { set; get; }
+         
         public InfoManagerViewModel()
         {
              
@@ -90,11 +89,11 @@ namespace AutoDbService.DbPrism.Models
         [Command]
         public async void Query()
         {
-            List = new List<string>();
-            Items = "";
-            //List = List ?? new List<TEntity>(); 
-            //var ls = (await DbService.GetListFromDb(out int n, p => true));
-            //List.AddRange(ls);
+            List = new ObservableCollection<TEntity>();
+            List.Clear();
+            var ls =await (DbService.GetListFromDb(out int n, p => true));
+            List.AddRange(ls);
+            //RaisePropertyChanged(nameof(List));
         }
     }
 }

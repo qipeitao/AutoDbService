@@ -18,7 +18,7 @@
                 Content="查询"   
                 Command="{Binding QueryCommand}" Cursor="Hand">
             </Button>
-            <ListView ItemsSource="{Binding List}">
+            <ListView ItemsSource="{Binding List,Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Id}" Background="Red"></TextBlock>

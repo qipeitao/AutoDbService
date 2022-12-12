@@ -16,7 +16,7 @@ namespace AutoDbService.DbPrism.Models
 {
     public class BuildDynamicType: IBuildDynamicType
     { 
-        private  MethodInfo? RaisePropertyChangedInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged");
+        private  MethodInfo? RaisePropertyChangedInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "OnRaisePropertyChanged");
         private MethodInfo? SetCommandWhenNullInfo = typeof(EngineBindableBase).GetRuntimeMethods().FirstOrDefault(p => p.Name == "SetCommandWhenNull");
         
         private IPropertyAndCommandConvertName PropertyAndCommandConvertName {
@@ -186,20 +186,18 @@ namespace AutoDbService.DbPrism.Models
                                            new Type[] { propertyInfo.PropertyType });
 
             ILGenerator custNameSetIL = custNameSetPropMthdBldr.GetILGenerator();
-
+            var local = custNameSetIL.DeclareLocal(typeof(EngineBindableBase), true);
             //custNameGetIL.Emit(OpCodes.Nop);
 
             custNameSetIL.Emit(OpCodes.Ldarg_0);
             custNameSetIL.Emit(OpCodes.Ldarg_1);
 
             custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr);
-            //custNameSetIL.Emit(OpCodes.Ldarg_0);
 
-            custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);
-            var local = custNameSetIL.DeclareLocal(propertyInfo.PropertyType, true);
-
+            custNameSetIL.Emit(OpCodes.Ldarg_0);
             custNameSetIL.Emit(OpCodes.Ldloc, local);
-            custNameSetIL.EmitCall(OpCodes.Call,RaisePropertyChangedInfo,null); 
+            custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);  
+            custNameSetIL.EmitCall(OpCodes.Call,RaisePropertyChangedInfo,new Type[] { typeof(EngineBindableBase),typeof(string) }); 
             //custNameGetIL.Emit(OpCodes.Nop);
             custNameSetIL.Emit(OpCodes.Ret);
 
