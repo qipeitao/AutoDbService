@@ -197,7 +197,7 @@ namespace AutoDbService.DbPrism.Models
             custNameSetIL.Emit(OpCodes.Ldarg_0);
             custNameSetIL.Emit(OpCodes.Ldloc, local);
             custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);  
-            custNameSetIL.EmitCall(OpCodes.Call,RaisePropertyChangedInfo,new Type[] { typeof(EngineBindableBase),typeof(string) }); 
+            custNameSetIL.EmitCall(OpCodes.Call,RaisePropertyChangedInfo,null); 
             //custNameGetIL.Emit(OpCodes.Nop);
             custNameSetIL.Emit(OpCodes.Ret);
 
