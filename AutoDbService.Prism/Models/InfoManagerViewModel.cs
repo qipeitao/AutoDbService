@@ -12,6 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity;
+using System.Collections.ObjectModel;
+using AutoDbService.DbPrism.Attributes;
+using System.Windows.Documents;
 
 namespace AutoDbService.DbPrism.Models
 {
@@ -26,6 +29,9 @@ namespace AutoDbService.DbPrism.Models
         public virtual string AddEntityDialogName { set; get; }
         public virtual string ModifyEntityDialogName { set; get; }
         public virtual IDbService<TEntity> DbService { get; set; }
+
+        [BindingProperty]
+        public virtual string List { set; get; }
         public InfoManagerViewModel()
         {
              
@@ -78,5 +84,12 @@ namespace AutoDbService.DbPrism.Models
         }
         #endregion   
         #endregion
+
+        [Command]
+        public async void Query()
+        { 
+            //var ls=(await DbService.GetListFromDb(out int n, p => true));
+            //List=ls;
+        }
     }
 }

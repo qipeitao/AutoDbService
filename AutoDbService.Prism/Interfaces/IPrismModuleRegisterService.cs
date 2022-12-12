@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Unity;
 
 namespace AutoDbService.DbPrism.Interfaces
 {
@@ -13,6 +14,9 @@ namespace AutoDbService.DbPrism.Interfaces
     /// </summary>
     public interface IPrismModuleRegisterService
     {
-        void DbRegisterTypes(IContainerRegistry containerRegistry, IModule obj);
+        void DbRegisterTypes(IContainerRegistry containerRegistry, object obj);
+        void DbRegisterTypes(IUnityContainer unityRegistry, object obj);
+
+        void DbRegisterType<View,ViewModel>(IUnityContainer unityContainer);
     }
 }

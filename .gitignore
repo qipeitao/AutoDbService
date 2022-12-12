@@ -74,3 +74,7 @@
 /AutoDbTests/bin/Debug
 /AutoDbTests/obj/Debug
 /packages
+/AutoDbService.TestAModule/bin/Debug/net6.0-windows
+/AutoDbService.TestAModule/obj
+/AutoDbService.TestBModule/bin/Debug/net6.0-windows
+/AutoDbService.TestBModule/obj

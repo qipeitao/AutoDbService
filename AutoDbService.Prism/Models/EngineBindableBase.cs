@@ -5,10 +5,12 @@ using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -38,8 +40,8 @@ namespace AutoDbService.DbPrism.Models
         {
             try
             {
-                EventAggregator = UnityContainer.Resolve<IEventAggregator>();
-                UnityContainer = UnityContainer.Resolve<IUnityContainer>();
+                UnityContainer = CommonServiceLocator.ServiceLocator.Current.GetInstance<IUnityContainer>();
+                EventAggregator = UnityContainer.Resolve<IEventAggregator>(); 
                 ContainerExtension = UnityContainer.Resolve<IContainerExtension>(); 
                 DialogService = UnityContainer.Resolve<IDialogService>(); 
             }
@@ -72,17 +74,46 @@ namespace AutoDbService.DbPrism.Models
                 var ps = baseMethod.GetParameters();
                 if (ps.Length == 0)
                 {
-                    var newValue = Activator.CreateInstance(typeof(DelegateCommand), new Action(() => baseMethod.Invoke(this, null)));
+                    var newValue = Activator.CreateInstance(typeof(DelegateCommand), new Action(() => baseMethod.Invoke(this, new object[0])));
                     field.SetValue(this, newValue);
                 }
                 else
                 {
+                    if(ps[0].ParameterType.IsValueType)
+                    {
+                        throw new Exception("参数不能位值类型");
+                    }
                     var del = Delegate.CreateDelegate(typeof(Action<>).MakeGenericType(ps[0].ParameterType),this,baseMethod);
-                    var newValue = Activator.CreateInstance(typeof(DelegateCommand<>).MakeGenericType(ps[0].ParameterType), del);
+                    var newValue = Activator.CreateInstance(typeof(DelegateCommand<>).MakeGenericType(ps[0].ParameterType) ,del );
                     field.SetValue(this, newValue);
                 }
             }
-        } 
+        }
+
+        public virtual void RequestNavigate(string regName, string viewName, Dictionary<string, string> param = null)
+        {
+            var RegionManager = UnityContainer.Resolve<IRegionManager>();
+            if (!RegionManager.Regions.ContainsRegionWithName(regName))
+            {
+                Trace.WriteLine($"当前不包含:{regName}");
+                return;
+            }
+            var para = new NavigationParameters();
+            if (param != null)
+            {
+                param.ToList().ForEach(p => para.Add(p.Key, p.Value));
+            } 
+            var view = RegionManager.Regions[regName].GetView(viewName);
+            if (view != null)
+            {
+                RegionManager.Regions[regName].Activate(view);
+            }
+            else
+            {
+                RegionManager.RequestNavigate(regName, viewName, para);
+            }
+        }
+
     }
 
     public abstract class DialogEngineBindableBase : EngineBindableBase, IDialogAware, IDataErrorInfo

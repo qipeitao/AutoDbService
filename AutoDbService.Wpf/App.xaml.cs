@@ -1,5 +1,11 @@
-﻿using Prism.Ioc;
+﻿using AutoDbService.DbPrism;
+using AutoDbService.DbPrism.Interfaces;
+using AutoDbService.Entity;
+using AutoDbService.TestAModule;
+using AutoDbService.TestBModule;
+using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Unity;
 using System;
 using System.Collections.Generic;
@@ -9,6 +15,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using Unity;
 
 namespace AutoDbService.Wpf
 {
@@ -29,37 +37,43 @@ namespace AutoDbService.Wpf
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-
+            moduleCatalog.AddModule<AutoDbService.TestAModule.TestAModule>();
+            moduleCatalog.AddModule<AutoDbService.TestBModule.TestBModule>();
+             
         } 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            ////弹窗底板
-            //containerRegistry.RegisterDialogWindow<DialogHostWindow>();
-            //containerRegistry.RegisterDialog<DoubleSetView>();
-            //containerRegistry.RegisterDialog<StringSetView>();
-            ////关闭
-            //containerRegistry.RegisterDialog<CloseWinView>(BlueFluentEngineConst.CloseWinViewName);
-            ////containerRegistry.RegisterDialog<ProcessToolTipView>(BlueFluentEngineConst.ProcessToolTipViewName); 
-
-            /////全局错误提示
-            //containerRegistry.RegisterForNavigation<ErrorMsg>();
-            ////全局等待
-            //containerRegistry.RegisterForNavigation<WaitLoad>();
-            ////全局登录页面
-            //containerRegistry.RegisterForNavigation<LoadView>(BlueFluentEngineConst.LoadViewName);
-        }
+        { 
+         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="e">IsQuietStart StartUserNameByQuiet StartPasswordByQuiet</param>
         protected override void OnStartup(StartupEventArgs e)
-        { 
+        {
+            AutoDbServiceEngine.Instance
+                    .UsePrism()
+                    .Builder<MyContext>();
             base.OnStartup(e); 
         }  
         protected override void OnInitialized()
         {
+         
             base.OnInitialized();
-        } 
+        }
+        protected override void ConfigureViewModelLocator()
+        {
+            base.ConfigureViewModelLocator(); 
+            //engine.AddType<IDynamicTypeClear, DynamicTypeClear>();
+            ViewModelLocationProvider.SetDefaultViewModelFactory(
+                t =>
+                AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
+                );
+            ViewModelLocationProvider.SetDefaultViewModelFactory((view, t) =>
+            AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
+            );
+        }
     }
+
+
 }
