@@ -62,7 +62,10 @@ namespace AutoDbService.Wpf
         {
             try
             {
-               
+                var ss=AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType<EngineBindableBase>();
+                ss.PropertyChanged += MainWindowViewModel_PropertyChanged;
+                ss.Name = new List<string>() { "1","2"};
+                Trace.WriteLine(ss.Name);
                 //AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbService<User>>(new DbService<User>(s=>s.OrderBy(t=>t.Id),s=>s.Include(t=>t.CreateTeacher)));
                 //var service= AutoDbServiceEngine.Instance.Get<IDbService<User>>();
                 //var list=   service.GetListFromDb(out int n);
@@ -87,6 +90,7 @@ namespace AutoDbService.Wpf
             } 
         }
 
+ 
         private void MainWindowViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Trace.WriteLine($"=======PropertyChanged:{e.PropertyName}");

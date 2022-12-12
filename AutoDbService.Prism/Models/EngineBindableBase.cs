@@ -27,6 +27,8 @@ namespace AutoDbService.DbPrism.Models
     /// </summary>
     public class EngineBindableBase : BindableBase, IDisposable
     {
+        [BindingProperty]
+        public virtual List<string> Name { set; get; }
         #region 接入 
         public readonly IEventAggregator EventAggregator; 
         public readonly IUnityContainer UnityContainer; 
@@ -114,10 +116,10 @@ namespace AutoDbService.DbPrism.Models
                 RegionManager.RequestNavigate(regName, viewName, para);
             }
         }
-        //public void RaiseProperty(string propertyName)
-        //{
-        //    RaisePropertyChanged(propertyName);
-        //}
+        public static void RaiseProperty(string propertyName)
+        {
+            //RaisePropertyChanged(propertyName);
+        }
     }
 
     public abstract class DialogEngineBindableBase : EngineBindableBase, IDialogAware, IDataErrorInfo

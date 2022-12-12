@@ -78,7 +78,7 @@ namespace AutoDbService.DbPrism.Models
             source.GetProperties().Where(p=>p.GetCustomAttribute<BindingPropertyAttribute>()!=null)
                 .ToList().ForEach(p =>
             {
-                myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p, source);
+                myTypeBuilder = BuildDynamicClassWithProperties(myTypeBuilder, p);
             });
             source.GetMethods().Where(p => p.GetCustomAttribute<CommandAttribute>()!=null)
                 .ToList().ForEach(p =>
@@ -87,10 +87,67 @@ namespace AutoDbService.DbPrism.Models
             }); 
             return new Tuple<AssemblyBuilder, ModuleBuilder, TypeBuilder>(myAsmBuilder, myModBuilder, myTypeBuilder); 
         }
-        private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, PropertyInfo propertyInfo, Type source)
+        //private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, PropertyInfo propertyInfo, Type source)
+        //{
+        //    FieldBuilder customerNameBldr = myTypeBuilder.DefineField(PropertyAndCommandConvertName.GetFieldByProperty(propertyInfo.Name),
+        //                                                    propertyInfo.PropertyType,
+        //                                                    FieldAttributes.Private | FieldAttributes.HasDefault);
+
+        //    PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(propertyInfo.Name,
+        //                                                     PropertyAttributes.None,
+        //                                                    CallingConventions.HasThis,
+        //                                                    propertyInfo.PropertyType, null
+        //                                                      );
+
+        //    custNamePropBldr.GetRequiredCustomModifiers();
+
+        //    //The property set and property get methods require a special
+        //    // set of attributes.
+        //    MethodAttributes getSetAttr =
+        //        MethodAttributes.Public | MethodAttributes.SpecialName|MethodAttributes.HideBySig| MethodAttributes.Virtual;
+
+        //    // Define the "get" accessor method for CustomerName.
+        //    MethodBuilder custNameGetPropMthdBldr =
+        //        myTypeBuilder.DefineMethod("get_" + custNamePropBldr.Name,
+        //                                   getSetAttr,
+        //                                   propertyInfo.PropertyType,
+        //                                   Type.EmptyTypes);
+
+        //    ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
+             
+        //    custNameGetIL.Emit(OpCodes.Ldarg_0);
+        //    custNameGetIL.Emit(OpCodes.Ldfld, customerNameBldr); 
+        //    custNameGetIL.Emit(OpCodes.Ret);
+
+        //    // Define the "set" accessor method for CustomerName.
+        //    MethodBuilder custNameSetPropMthdBldr =
+        //        myTypeBuilder.DefineMethod("set_" + custNamePropBldr.Name,
+        //                                   getSetAttr,
+        //                                   null,
+        //                                   new Type[] { propertyInfo.PropertyType });
+
+        //    ILGenerator custNameSetIL = custNameSetPropMthdBldr.GetILGenerator();
+           
+
+        //    custNameSetIL.Emit(OpCodes.Ldarg_0); 
+        //    custNameSetIL.Emit(OpCodes.Ldarg_1); 
+        //    custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr); 
+
+        //    custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);
+        //    custNameSetIL.Emit(OpCodes.Call, source.GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged"));
+        //    //custNameSetIL.Emit(OpCodes.Call, typeof(Trace).GetMethod("WriteLine",new Type[] { typeof(string)}));
+        //    custNameSetIL.Emit(OpCodes.Ret);
+
+        //    custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr);
+        //    custNamePropBldr.SetSetMethod(custNameSetPropMthdBldr);
+
+        //    return myTypeBuilder;
+        //}
+
+        private TypeBuilder BuildDynamicClassWithProperties(TypeBuilder myTypeBuilder, PropertyInfo propertyInfo)
         {
-            FieldBuilder customerNameBldr = myTypeBuilder.DefineField(PropertyAndCommandConvertName.GetFieldByProperty(propertyInfo.Name),
-                                                            propertyInfo.PropertyType,
+            FieldBuilder customerNameBldr = myTypeBuilder.DefineField("my" + propertyInfo.Name,
+                                                           propertyInfo.PropertyType,
                                                             FieldAttributes.Private | FieldAttributes.HasDefault);
 
             PropertyBuilder custNamePropBldr = myTypeBuilder.DefineProperty(propertyInfo.Name,
@@ -104,11 +161,13 @@ namespace AutoDbService.DbPrism.Models
             //The property set and property get methods require a special
             // set of attributes.
             MethodAttributes getSetAttr =
-                MethodAttributes.Public | MethodAttributes.SpecialName|MethodAttributes.HideBySig| MethodAttributes.Virtual;
+                MethodAttributes.Public | MethodAttributes.SpecialName |
+                    MethodAttributes.HideBySig
+                    | MethodAttributes.Virtual;
 
             // Define the "get" accessor method for CustomerName.
             MethodBuilder custNameGetPropMthdBldr =
-                myTypeBuilder.DefineMethod("get_" + custNamePropBldr.Name,
+                myTypeBuilder.DefineMethod("get_" + propertyInfo.Name,
                                            getSetAttr,
                                            propertyInfo.PropertyType,
                                            Type.EmptyTypes);
@@ -121,21 +180,27 @@ namespace AutoDbService.DbPrism.Models
 
             // Define the "set" accessor method for CustomerName.
             MethodBuilder custNameSetPropMthdBldr =
-                myTypeBuilder.DefineMethod("set_" + custNamePropBldr.Name,
+                myTypeBuilder.DefineMethod("set_" + propertyInfo.Name,
                                            getSetAttr,
                                            null,
                                            new Type[] { propertyInfo.PropertyType });
 
             ILGenerator custNameSetIL = custNameSetPropMthdBldr.GetILGenerator();
-           
 
-            custNameSetIL.Emit(OpCodes.Ldarg_0); 
-            custNameSetIL.Emit(OpCodes.Ldarg_1); 
-            custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr); 
+            //custNameGetIL.Emit(OpCodes.Nop);
+
+            custNameSetIL.Emit(OpCodes.Ldarg_0);
+            custNameSetIL.Emit(OpCodes.Ldarg_1);
+
+            custNameSetIL.Emit(OpCodes.Stfld, customerNameBldr);
+            //custNameSetIL.Emit(OpCodes.Ldarg_0);
 
             custNameSetIL.Emit(OpCodes.Ldstr, propertyInfo.Name);
-            custNameSetIL.Emit(OpCodes.Call, source.GetRuntimeMethods().FirstOrDefault(p => p.Name == "RaisePropertyChanged"));
-            //custNameSetIL.Emit(OpCodes.Call, typeof(Trace).GetMethod("WriteLine",new Type[] { typeof(string)}));
+            var local = custNameSetIL.DeclareLocal(propertyInfo.PropertyType, true);
+
+            custNameSetIL.Emit(OpCodes.Ldloc, local);
+            custNameSetIL.EmitCall(OpCodes.Call,RaisePropertyChangedInfo,null); 
+            //custNameGetIL.Emit(OpCodes.Nop);
             custNameSetIL.Emit(OpCodes.Ret);
 
             custNamePropBldr.SetGetMethod(custNameGetPropMthdBldr);
@@ -185,7 +250,7 @@ namespace AutoDbService.DbPrism.Models
         //                                   getSetAttr,
         //                                   typeof(ICommand),
         //                                   Type.EmptyTypes);
-           
+
         //    ILGenerator custNameGetIL = custNameGetPropMthdBldr.GetILGenerator();
         //    var labEndIf = custNameGetIL.DefineLabel();
         //    var labEnd = custNameGetIL.DefineLabel();
