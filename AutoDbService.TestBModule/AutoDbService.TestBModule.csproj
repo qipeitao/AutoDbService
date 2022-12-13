@@ -11,8 +11,4 @@
     <ProjectReference Include="..\AutoDbService.Prism\AutoDbService.DbPrism.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-
 </Project>
