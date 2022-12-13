@@ -61,6 +61,7 @@ namespace AutoDbService.Wpf
          
             base.OnInitialized();
         }
+        
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator(); 

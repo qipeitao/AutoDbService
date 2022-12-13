@@ -16,7 +16,7 @@
         <StackPanel Orientation="Vertical">
             <Button Content="A" Command="{Binding ToACommand}" />
             <Button Content="B" Command="{Binding ToBCommand}" />
-            <Button Content="B" Command="{Binding ToCCommand}" CommandParameter="12321"/>
+            <Button Content="C" Command="{Binding ToCCommand}" CommandParameter="12321"/>
         </StackPanel>
         
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainRegion">

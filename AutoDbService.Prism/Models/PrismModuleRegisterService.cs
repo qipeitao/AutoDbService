@@ -44,8 +44,7 @@ namespace AutoDbService.DbPrism.Models
                 if (manager != null)
                 {
                     var createType = GetViewModelByViewType<IInfoManagerViewModel<EntityBase>>(p, manager.TableType, types, unityContainer, containerRegistry);
-                    unityContainer.RegisterFactory(createType, createType.FullName,
-                        (u,t,s) => AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t),null);
+               
                     containerRegistry.RegisterForNavigationWithViewModel(p, createType);
                     return;
                 }
@@ -53,8 +52,7 @@ namespace AutoDbService.DbPrism.Models
                 if (add != null)
                 {
                     var createType = GetViewModelByViewType<IAddViewModel<EntityBase>>(p, add.TableType, types, unityContainer, containerRegistry);
-                    unityContainer.RegisterFactory(createType, createType.FullName,
-                        (u, t, s) => AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t), null);
+                    
                     containerRegistry.RegisterForNavigationWithViewModel(p, createType); 
                     return;
                 }
@@ -62,8 +60,7 @@ namespace AutoDbService.DbPrism.Models
                 if (modify != null)
                 {
                     var createType = GetViewModelByViewType<IModifyViewModel<EntityBase>>(p, modify.TableType, types, unityContainer, containerRegistry);
-                    unityContainer.RegisterFactory(createType, createType.FullName,
-                        (u, t, s) => AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t), null);
+                  
                     containerRegistry.RegisterForNavigationWithViewModel(p, createType);   
                     return;
                 }
@@ -75,9 +72,7 @@ namespace AutoDbService.DbPrism.Models
             string modelName = GetViewModelNameByViewType(view); 
             var type= types.FirstOrDefault(p => p.Name == modelName);
             if (type != null)
-            {
-                unityContainer.RegisterFactory(type, type.FullName,
-                        (u, t, s) => AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t), null);
+            { 
                 containerRegistry.RegisterForNavigationWithViewModel(view, type);
                 return type; 
             }
@@ -91,7 +86,7 @@ namespace AutoDbService.DbPrism.Models
         }
 
         private string  GetViewModelNameByViewType(Type view)
-        {
+        { 
             string modelName = String.Empty;
             if (view.Name.EndsWith("ViewModel"))
             {
