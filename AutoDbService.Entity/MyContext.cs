@@ -20,7 +20,7 @@ namespace AutoDbService.Entity
   
     public class MyContext : AutoMapContext
     {
-        private readonly string connection = ConfigurationManager.AppSettings["DBConnection"] ?? "Server=localhost;port=3306;userid=root;password=admin;persist security info=false;charset=utf8mb4;database=bluefluent;sslMode=none;AllowPublicKeyRetrieval=true;";
+        private readonly string connection = ConfigurationManager.AppSettings["DBConnection"] ?? "Server=localhost;port=3306;userid=root;password=admin;persist security info=false;charset=utf8mb4;database=quick;sslMode=none;AllowPublicKeyRetrieval=true;";
         public MyContext() : base()
         {
             //Trace.WriteLine("++++++++++++++++++++++++++++++++++++++++++");
