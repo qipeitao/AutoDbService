@@ -54,7 +54,8 @@ namespace AutoDbService.Wpf
             AutoDbServiceEngine.Instance
                     .UsePrism()
                     .Builder<MyContext>();
-            base.OnStartup(e); 
+            base.OnStartup(e);
+           
         }  
         protected override void OnInitialized()
         {
@@ -64,15 +65,8 @@ namespace AutoDbService.Wpf
         
         protected override void ConfigureViewModelLocator()
         {
-            base.ConfigureViewModelLocator(); 
-            //engine.AddType<IDynamicTypeClear, DynamicTypeClear>();
-            ViewModelLocationProvider.SetDefaultViewModelFactory(
-                t =>
-                AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
-                );
-            ViewModelLocationProvider.SetDefaultViewModelFactory((view, t) =>
-            AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
-            );
+            base.ConfigureViewModelLocator();
+            AutoDbServiceEngine.Instance.ReConfigureViewModelLocator(); 
         }
     }
 
