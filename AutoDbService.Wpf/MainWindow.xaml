@@ -14,8 +14,9 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Vertical">
-            <Button Content="and" Command="{Binding AndCommand}" DataContext="{Binding MM}"/>
-            <Button Content="add" Command="{Binding AddCommand}" DataContext="{Binding MM}"/>
+            <Button Content="A" Command="{Binding ToACommand}" />
+            <Button Content="B" Command="{Binding ToBCommand}" />
+            <Button Content="C" Command="{Binding ToCCommand}" CommandParameter="12321"/>
         </StackPanel>
         
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainRegion">

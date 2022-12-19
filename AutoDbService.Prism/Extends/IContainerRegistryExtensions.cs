@@ -22,10 +22,9 @@ namespace AutoDbService.DbPrism.Extends
             if (string.IsNullOrWhiteSpace(name))
             {
                 name = viewType.Name;
-            }
-
+            } 
             ViewModelLocationProvider.Register(viewType.ToString(), viewModelType);
-            containerRegistry.RegisterForNavigation(viewType, name);
+            containerRegistry.RegisterForNavigation(viewType, name); 
         }
         public static void RegisterForNavigationWithViewModel(this IContainerRegistry containerRegistry, Type viewType, Type viewModelType)
         {

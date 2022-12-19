@@ -2,6 +2,11 @@ using AutoDbService.Models;
 using AutoDbService.DbPrism.Interfaces;
 using AutoDbService.DbPrism.Models;
 using System;
+using Prism.Mvvm;
+using Prism.Modularity;
+using Prism.Unity;
+using System.Linq.Expressions;
+using System.Windows;
 
 namespace AutoDbService.DbPrism
 {
@@ -15,9 +20,19 @@ namespace AutoDbService.DbPrism
             engine.AddType<IBuildDynamicType, BuildDynamicType>();
             engine.AddType<IPropertyAndCommandConvertName, PropertyAndCommandConvertName>();
             engine.AddType<IPrismModuleRegisterService, PrismModuleRegisterService>();
-            
-            //engine.AddType<IDynamicTypeClear, DynamicTypeClear>();
+            engine.AddType<IModule, AutoDbModule>(false);
 
+            return engine;
+        }
+        public static AutoDbServiceEngine ReConfigureViewModelLocator(this AutoDbServiceEngine engine)
+        {
+            ViewModelLocationProvider.SetDefaultViewModelFactory(
+               t =>
+               AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
+               );
+            ViewModelLocationProvider.SetDefaultViewModelFactory((view, t) =>
+            AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType(t)
+            ); 
             return engine;
         }
     }

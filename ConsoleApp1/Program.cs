@@ -1,5 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using AutoDbService.DbPrism.Models;
 using Prism.Commands;
+using System;
+using System.Diagnostics;
 using System.Windows.Input;
 
 public static class Progrom
@@ -12,7 +15,7 @@ public static class Progrom
         }
          
     }
-    public class M
+    public class M: EngineBindableBase
     {
         private ICommand name;
         public ICommand Name
@@ -37,10 +40,7 @@ public static class Progrom
             }
         } 
         public object Value { set; get; }
-        protected void RaisePropertyChanged(string propertyName = null)
-        {
-
-        } 
+       
     }
     static void Main(string[] args)
     {
@@ -50,7 +50,7 @@ public static class Progrom
             s = new M();
         }
 
-        Console.WriteLine("Hello, World!");
+        Trace.WriteLine("Hello, World!");
     }
    
 }

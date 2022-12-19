@@ -14,6 +14,8 @@
   <ItemGroup>
     <ProjectReference Include="..\AutoDbService.Entity\AutoDbService.Entity.csproj" />
     <ProjectReference Include="..\AutoDbService.Prism\AutoDbService.DbPrism.csproj" />
+    <ProjectReference Include="..\AutoDbService.TestAModule\AutoDbService.TestAModule.csproj" />
+    <ProjectReference Include="..\AutoDbService.TestBModule\AutoDbService.TestBModule.csproj" />
     <ProjectReference Include="..\AutoDbService\AutoDbService.csproj" />
   </ItemGroup>
 

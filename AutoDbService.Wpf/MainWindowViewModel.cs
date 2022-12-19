@@ -36,40 +36,40 @@ using Prism.Mvvm;
 using AutoDbService.DbPrism.Models;
 using AutoDbService.DbPrism.Interfaces;
 using AutoDbService.DbPrism;
+using AutoDbService.DbPrism.Attributes;
 
 namespace AutoDbService.Wpf
 {
-    public class MMM: EngineBindableBase
+ 
+    public class MainWindowViewModel: EngineBindableBase
     {
-        public virtual string Name { set; get; }
-        public virtual void Add()
+        [Command]
+       public void ToA()
         {
-            Trace.WriteLine($"MMM--Add:");
+            RequestNavigate("MainRegion", "UserView");
         }
-        //public void Or()
-        //{
-        //    Trace.WriteLine($"MMM--or:");
-        //}
-        public virtual void And(int? n)
+        [Command]
+        public void ToB()
         {
-            Trace.WriteLine($"MMM--And:{n}");
+            RequestNavigate("MainRegion", "TeacherView");
         }
-    }
-    public class MainWindowViewModel: BindableBase
-    { 
-        public MMM MM { set; get; }
+        [Command]
+        public void ToC(string a)
+        {
+            Trace.WriteLine("ToC:"+a);
+        }
         public MainWindowViewModel()
         {
             try
             {
-                AutoDbServiceEngine.Instance
-                    .UsePrism() 
-                    .Builder<MyContext>();
-
-                AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbService<User>>(new DbService<User>(s=>s.OrderBy(t=>t.Id),s=>s.Include(t=>t.CreateTeacher)));
-                var service= AutoDbServiceEngine.Instance.Get<IDbService<User>>();
-                var list=   service.GetListFromDb(out int n);
-                list.Wait();
+                //var ss=AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType<EngineBindableBase>();
+                //ss.PropertyChanged += MainWindowViewModel_PropertyChanged;
+                //ss.Name = new List<string>() { "1","2"};
+                //Trace.WriteLine(ss.Name);
+                //AutoDbServiceEngine.Instance.ReplaceServiceValue<IDbService<User>>(new DbService<User>(s=>s.OrderBy(t=>t.Id),s=>s.Include(t=>t.CreateTeacher)));
+                //var service= AutoDbServiceEngine.Instance.Get<IDbService<User>>();
+                //var list=   service.GetListFromDb(out int n);
+                //list.Wait();
                 //using (MyContext db=new MyContext())
                 //{
                 //    //var teach = new Teacher { Id = Guid.NewGuid() };
@@ -87,23 +87,15 @@ namespace AutoDbService.Wpf
             catch(Exception ex)
             {
 
-            }
-            MM = AutoDbServiceEngine.Instance.Get<IBuildDynamicType>().BuildType<MMM>(); 
-            MM.PropertyChanged += MainWindowViewModel_PropertyChanged;
-            MM.Name = "aaaaaa";
-            MM.Name = "bbbbb";
-             //MM.Add();
-            MM.And(10);
-            var listt=  MM.GetType().GetRuntimeProperties().FirstOrDefault(p=>p.Name.EndsWith("Command"));
-           var command= listt.GetValue(MM) as ICommand;
-            command.Execute(null);
+            } 
         }
 
+ 
         private void MainWindowViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             Trace.WriteLine($"=======PropertyChanged:{e.PropertyName}");
         }
 
-        public virtual string Name { set; get; }
+       
     }
 }
