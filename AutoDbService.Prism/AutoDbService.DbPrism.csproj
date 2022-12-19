@@ -3,7 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
-    <UseWPF>true</UseWPF>
+    <UseWPF>true</UseWPF> 
+    <SignAssembly>False</SignAssembly>
+	  <EnablePackageValidation>true</EnablePackageValidation>
+	  <PackageVersion>1.0.0</PackageVersion>
+	  <Description>模块View自动注册，生成关联viewmodel</Description>
+	  <Authors>大圣</Authors>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>	
+	  <GenerateDocumentationFile>True</GenerateDocumentationFile> 
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +19,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoDbService\AutoDbService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>True</Pack>
+    </None>
   </ItemGroup>
 
 </Project>

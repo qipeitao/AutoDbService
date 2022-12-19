@@ -1,6 +1,5 @@
 ﻿using AutoDbService.DbPrism.Attributes;
-using AutoDbService.DbPrism.Extends;
-using Org.BouncyCastle.Asn1.Ocsp;
+using AutoDbService.DbPrism.Extends; 
 using Prism.Commands;
 using Prism.Events;
 using Prism.Ioc;
