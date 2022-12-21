@@ -1,11 +1,8 @@
-# Repository
-
-依赖项 
-* [Entity Framework Core](#entity-framework-core) 
-
-### Basic usage
-
-使用
+# 子项目
+AutoDbService.DbPrism 说明在项目内部
+ 
+ 
+# 使用
 
 ```cs
 //定义的数据上下文内容
