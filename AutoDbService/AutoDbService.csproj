@@ -7,8 +7,8 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
 	  <EnablePackageValidation>true</EnablePackageValidation>
-	  <PackageVersion>1.0.0</PackageVersion>
-	  <Description>保留include，自动创建库表服务</Description>
+	  <PackageVersion>1.0.1</PackageVersion>
+	  <Description>更新描述</Description>
 	  <Authors>大圣</Authors>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
