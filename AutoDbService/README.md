@@ -1,10 +1,7 @@
 # Repository
 
 依赖项 
-* [Entity Framework Core](#entity-framework-core) 
-
-### Basic usage
-
+* [Entity Framework Core](#entity-framework-core)   
 使用
 
 ```cs

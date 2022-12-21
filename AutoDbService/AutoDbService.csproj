@@ -7,10 +7,11 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <SignAssembly>False</SignAssembly>
 	  <EnablePackageValidation>true</EnablePackageValidation>
-	  <PackageVersion>1.0.1</PackageVersion>
+	  <PackageVersion>1.0.2</PackageVersion>
 	  <Description>更新描述</Description>
 	  <Authors>大圣</Authors>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageProjectUrl>https://github.com/yuwuhen88/AutoDbService</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
