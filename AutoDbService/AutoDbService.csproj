@@ -11,7 +11,7 @@
 	  <Description>更新描述</Description>
 	  <Authors>大圣</Authors>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
-	  <PackageProjectUrl>https://github.com/yuwuhen88/AutoDbService</PackageProjectUrl>
+	  <PackageProjectUrl>https://github.com/qipeitao/AutoDbService</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
