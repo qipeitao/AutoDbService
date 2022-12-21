@@ -1,6 +1,3 @@
-# 子项目
-AutoDbService.DbPrism 说明在项目内部
- 
  
 # 使用
 
@@ -57,4 +54,6 @@ IDbService<User> UserService= AutoDbServiceEngine.Instance
 await UserService.GetListFromDb(out int n,u=>u.Name!=null,u=>u.OrderBy(p=>p.CreateTime),u=>u.Teacher,new EnginePage{Skip=100，Take=20 });
 ```
 
-
+# 扩展项目
+AutoDbService.DbPrism 用于Prism扩展
+说明在项目内部
